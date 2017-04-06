@@ -15,9 +15,12 @@ function MyClock(scene) {
 
 	this.cylinder = new MyCylinder (this.scene, 12, 1);
 	this.topFace = new MyCircle (this.scene, 12, 1);
-	this.secondPointer = new MyClockHand (this.scene, 90);
-	this.minutePointer = new MyClockHand (this.scene, 180);
-	this.hourPointer = new MyClockHand (this.scene, 270);
+	this.secondPointer = new MyClockHand (this.scene);
+	this.secondPointer.setAngle (90);
+	this.minutePointer = new MyClockHand (this.scene);
+	this.minutePointer.setAngle (180);
+	this.hourPointer = new MyClockHand (this.scene);
+	this.hourPointer.setAngle(270);
 
 
 	this.materialClock = new CGFappearance(this.scene);

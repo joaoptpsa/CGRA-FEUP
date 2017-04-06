@@ -2,7 +2,7 @@
  * MyClockHand
  * @constructor
  */
- function MyClockHand(scene, angle) {
+ function MyClockHand(scene) {
  	CGFobject.call(this,scene);
     
     this.angle = angle;
