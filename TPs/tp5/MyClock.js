@@ -95,8 +95,6 @@ MyClock.prototype.update = function (currTime){ //CurrTime = Current time in ms
 	var secondsInc = 360/60;
 	var minutesInc = secondsInc/60;
 	var hoursInc = minutesInc/12; //A clock goes twice a day through the 00 hour 
-	
-	//we could make a getter
 
 	this.secondPointer.setAngle (this.secondPointer.angle + (secondsInc * (deltaTime / 1000)));
 	this.minutePointer.setAngle (this.minutePointer.angle + (minutesInc * (deltaTime / 1000)));
