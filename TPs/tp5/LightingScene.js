@@ -278,4 +278,11 @@ LightingScene.prototype.display = function() {
 		this.clock.display();
 	this.popMatrix();
 	// ---- END Primitive drawing section
+
+	this.setUpdatePeriod(100);
 };
+
+
+LightingScene.prototype.update = function (currTime){
+
+}
