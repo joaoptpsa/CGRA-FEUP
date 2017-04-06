@@ -8,7 +8,6 @@
     this.angle = angle;
 
  	this.initBuffers();
- 	
  };
 
  MyClockHand.prototype = Object.create(CGFobject.prototype);

@@ -284,5 +284,6 @@ LightingScene.prototype.display = function() {
 
 
 LightingScene.prototype.update = function (currTime){
+	this.clock.update(currTime);
 
 }

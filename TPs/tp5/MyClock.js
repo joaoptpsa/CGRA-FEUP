@@ -8,6 +8,11 @@ var degToRad = Math.PI / 180.0;
 
 function MyClock(scene) {
 	CGFobject.call(this,scene);
+
+	//Get the time in ms so we can update the clock relatively to this
+	var d = new Date();
+	this.oldCurrTime = d.getTime();
+
 	this.cylinder = new MyCylinder (this.scene, 12, 1);
 	this.topFace = new MyCircle (this.scene, 12, 1);
 	this.secondPointer = new MyClockHand (this.scene, 90);
@@ -81,4 +86,19 @@ MyClock.prototype.display = function () {
 		this.pointerMaterial.apply();
 		this.hourPointer.display();
 	this.scene.popMatrix();
+};
+
+MyClock.prototype.update = function (currTime){ //CurrTime = Current time in ms
+	var deltaTime = currTime - this.oldCurrTime;
+	this.oldCurrTime = currTime;
+
+	var secondsInc = 360/60;
+	var minutesInc = secondsInc/60;
+	var hoursInc = minutesInc/12; //A clock goes twice a day through the 00 hour 
+	
+	//we could make a getter
+
+	this.secondPointer.setAngle (this.secondPointer.angle + (secondsInc * (deltaTime / 1000)));
+	this.minutePointer.setAngle (this.minutePointer.angle + (minutesInc * (deltaTime / 1000)));
+	this.hourPointer.setAngle (this.hourPointer.angle + (hoursInc * (deltaTime / 1000)));
 };
