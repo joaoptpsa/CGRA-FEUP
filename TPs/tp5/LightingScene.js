@@ -41,7 +41,7 @@ LightingScene.prototype.init = function(application) {
 	this.boardA = new Plane(this, BOARD_A_DIVISIONS,-1/6,1+1/6, 0, 1); //board width = 6 logo queremos que a textura fique centrada entre 1/6 e 5/6
 	this.boardB = new Plane(this, BOARD_B_DIVISIONS);
 
-	//this.clock = new MyClock (this);
+	this.clock = new MyClock (this);
 
 	// Materials
 	this.materialDefault = new CGFappearance(this);
@@ -270,13 +270,12 @@ LightingScene.prototype.display = function() {
 		this.cylinderAppearance.apply();
 		this.cylinder.display();
 	this.popMatrix();
-
+	
 	// Clock
-	/*
 	this.pushMatrix();
-		this.translate(5, 0, 5);
+		this.translate(7.25, 7.2, 0.1); // Board A extends in x until 7 and Board B starts at 7.5
+		this.scale(0.5, 0.5, 0.2); //make the clock flatter and a bit smaller
 		this.clock.display();
 	this.popMatrix();
-	*/
 	// ---- END Primitive drawing section
 };
