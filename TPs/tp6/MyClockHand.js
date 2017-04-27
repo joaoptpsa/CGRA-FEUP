@@ -5,7 +5,7 @@
  function MyClockHand(scene) {
  	CGFobject.call(this,scene);
     
-    	this.angle = 0;
+    this.angle = 0;
 
  	this.initBuffers();
  };
