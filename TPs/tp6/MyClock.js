@@ -22,6 +22,7 @@ function MyClock(scene) {
 	this.hourPointer = new MyClockHand (this.scene);
 	this.hourPointer.setAngle(270);
 
+	this.running = true;
 
 	this.materialClock = new CGFappearance(this.scene);
 	this.materialClock.setAmbient(0.6, 0.32, 0.004,1);

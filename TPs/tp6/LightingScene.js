@@ -12,8 +12,11 @@ LightingScene.prototype.constructor = LightingScene;
 LightingScene.prototype.init = function(application) {
 	CGFscene.prototype.init.call(this, application);
 
-	this.option1=true;
-	this.option2=true;
+	this.luz1=true;
+	this.luz2=true;
+	this.luz3=true;
+	this.luz4=true;
+
 	this.speed=3;
 
 	this.initCameras();
@@ -68,13 +71,73 @@ LightingScene.prototype.initCameras = function() {
 
 
 LightingScene.prototype.initLights = function() {
-	this.setGlobalAmbientLight(1, 1, 1, 1);
+	this.setGlobalAmbientLight(0, 0, 0, 1);
+	
+	// Positions for four lights
+	this.lights[0].setPosition(12, 6, 12, 1);
+	this.lights[0].setVisible(true); // show marker on light position (different from enabled)
+	this.lights[0].setAmbient(0.5, 0.5, 0.5, 1);
+	this.lights[0].setDiffuse(1.0, 1.0, 1.0, 1.0);
+	this.lights[0].setSpecular (1.0, 1.0, 1.0, 1.0);
+	this.lights[0].enable();
+	
+	this.lights[1].setPosition(12, 6, 4, 1);
+	this.lights[1].setVisible(true); // show marker on light position (different from enabled)
+	this.lights[1].setAmbient(0.5, 0.5, 0.5, 1);
+	this.lights[1].setDiffuse(1.0, 1.0, 1.0, 1.0);
+	this.lights[1].setSpecular (1.0, 1.0, 1.0, 1.0);
+	this.lights[1].enable();
+
+	this.lights[2].setPosition(4, 6, 12, 1);
+	this.lights[2].setVisible(true); // show marker on light position (different from enabled)
+	this.lights[2].setAmbient(0.5, 0.5, 0.5, 1);
+	this.lights[2].setDiffuse(1.0, 1.0, 1.0, 1.0);
+	this.lights[2].setSpecular (1.0, 1.0, 1.0, 1.0);
+	this.lights[2].enable ();
+
+	this.lights[3].setPosition(4, 6, 4, 1);
+	this.lights[3].setVisible(true); // show marker on light position (different from enabled)
+	this.lights[3].setAmbient(0.5, 0.5, 0.5, 1);
+	this.lights[3].setDiffuse(1.0, 1.0, 1.0, 1.0);
+	this.lights[3].setSpecular (1.0, 1.0, 1.0, 1.0);
+	this.lights[3].enable ();
 	
 };
 
 LightingScene.prototype.updateLights = function() {
-	for (i = 0; i < this.lights.length; i++)
+	for (i = 0; i < this.lights.length; i++){
 		this.lights[i].update();
+	}
+
+	if (this.luz1){
+		this.lights[0].enable();
+	}
+	else{
+		this.lights[0].disable();
+	}
+
+	if (this.luz2){
+		this.lights[1].enable();
+	}
+	else{
+		this.lights[1].disable();
+	}
+
+	if (this.luz3){
+		this.lights[2].enable();
+	}
+	else{
+		this.lights[2].disable();
+	}
+
+	if (this.luz4){
+		this.lights[3].enable();
+	}
+	else{
+		this.lights[3].disable();
+	}
+
+
 }
 
 
@@ -144,18 +207,20 @@ LightingScene.prototype.display = function() {
 		this.submarine.display ();
 	this.popMatrix();
 
-	this.setUpdatePeriod(100);
+	this.setUpdatePeriod (100);
 };
 
 
 LightingScene.prototype.update = function (currTime){
-	this.clock.update(currTime);
+	if (this.clock.running){
+		this.clock.update(currTime);
+	}
 
 };
 
 
-LightingScene.prototype.doSomething = function (){
-	console.log("Doing something...");
+LightingScene.prototype.toggleClock = function (){
+	this.clock.running = !this.clock.running;
 };
 
 
