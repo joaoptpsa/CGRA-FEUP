@@ -16,6 +16,7 @@ serialInclude([
 	'MyClock.js',
 	'MyCircle.js',
 	'MyClockHand.js',
+	'MySubmarine.js',
 	'MyInterface.js',
 
 	main=function() {

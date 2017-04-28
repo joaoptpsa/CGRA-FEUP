@@ -2,9 +2,8 @@
  * MySubmarine
  * @constructor
  */
- function MySubmarine(scene, slices, radius) {
- 	CGFobject.call(this,scene);
-	
+ function MySubmarine(scene) {
+	CGFobject.call(this,scene);
 
  	this.initBuffers();
  };
@@ -15,9 +14,9 @@
  MySubmarine.prototype.initBuffers = function() {
 
 	this.vertices = [];
- 	this.normals = [];
+ 	//this.normals = [];
  	this.indices = [];
- 	this.texCoords = [];
+ 	//this.texCoords = [];
 
  	this.vertices.push (0.5, 0.3, 0);
  	this.vertices.push (-0.5, 0.3, 0);
