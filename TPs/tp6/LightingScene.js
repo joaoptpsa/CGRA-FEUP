@@ -20,7 +20,7 @@ LightingScene.prototype.init = function(application) {
 
 	this.initLights();
 
-	this.gl.clearColor(0.0, 0.0, 0.0, 1.0);
+	this.gl.clearColor(0.0, 0.0, 1.0, 1.0);
 	this.gl.clearDepth(100.0);
 	this.gl.enable(this.gl.DEPTH_TEST);
 	this.gl.enable(this.gl.CULL_FACE);
@@ -30,6 +30,8 @@ LightingScene.prototype.init = function(application) {
 
 	// Scene elements
 	this.oceanPlane = new Plane (this, OCEAN_DIVISIONS);
+	this.pole = new MyCylinder (this, 20, 10);
+	this.clock = new MyClock (this);
 	this.submarine = new MySubmarine (this);
 
 	// Materials
@@ -43,6 +45,13 @@ LightingScene.prototype.init = function(application) {
 	this.oceanAppearance.setTextureWrap("REPEAT", "REPEAT");
 	this.oceanAppearance.loadTexture("resources/images/ocean.jpg");
 
+	this.cylinderAppearance = new CGFappearance(this);
+	this.cylinderAppearance.setAmbient(1, 1, 1, 1);
+	this.cylinderAppearance.setSpecular(0.1, 0.1, 0.1, 1);
+	this.cylinderAppearance.setDiffuse (0.8, 0.8, 0.8, 1);
+	this.cylinderAppearance.setShininess (20);
+	this.cylinderAppearance.loadTexture("resources/images/brick.jpg");
+	
 	//Enable Textures
 	this.enableTextures (true);
 	
@@ -54,25 +63,7 @@ LightingScene.prototype.initCameras = function() {
 
 
 LightingScene.prototype.initLights = function() {
-	this.setGlobalAmbientLight(0, 0 ,0, 1);
-	
-	// Positions for lights
-	
-	this.lights[0].setPosition(5, 5, 5, 1);
-	this.lights[0].setVisible(true);
-	
-	this.lights[1].setPosition(-5, 5, 5, 1);
-	this.lights[1].setVisible(true);
-
-	this.lights[0].setAmbient(0, 0, 0, 1);
-	this.lights[0].setDiffuse(1.0, 1.0, 1.0, 1.0);
-	this.lights[0].setSpecular(1.0, 1.0, 1.0, 1.0);
-	this.lights[0].enable();
-
-	this.lights[1].setAmbient(0, 0, 0, 1);
-	this.lights[1].setDiffuse(1.0, 1.0, 1.0, 1.0);
-	this.lights[1].setSpecular(1.0, 1.0, 1.0, 1.0);
-	this.lights[1].enable();
+	this.setGlobalAmbientLight(1, 1, 1, 1);
 	
 };
 
@@ -116,22 +107,47 @@ LightingScene.prototype.display = function() {
 
 	// Ocean Plane
 	this.pushMatrix();
+		this.rotate (-90 * degToRad, 1, 0, 0);
+		this.translate (8, -8, 0)
+		this.scale (16, 16, 0);
+
 		this.oceanAppearance.apply();
 		this.oceanPlane.display ();
 	this.popMatrix();
 
+	//Pole
 	this.pushMatrix();
+		this.rotate (-90 * degToRad, 1, 0, 0);
+		this.translate (8, 0.2, 0);
+		this.scale (0.2, 0.2, 6);
+		
+		this.cylinderAppearance.apply ();
+		this.pole.display ();
+	this.popMatrix();
+
+	//Clock
+	this.pushMatrix();
+		this.translate (8, 5, 0);
+		this.scale (1, 1 , 0.2);
+		this.clock.display ();
+	this.popMatrix();
+	
+	//Submarine
+	this.pushMatrix();
+		this.translate (8, 0 , 8);
+		this.rotate (180 * degToRad, 0, 1, 0);
 		this.submarine.display ();
 	this.popMatrix();
 
+	this.setUpdatePeriod(100);
 };
 
-/*
+
 LightingScene.prototype.update = function (currTime){
 	this.clock.update(currTime);
 
 };
-*/
+
 
 LightingScene.prototype.doSomething = function (){
 	console.log("Doing something...");
