@@ -33,6 +33,8 @@ LightingScene.prototype.init = function(application) {
 	this.pole = new MyCylinder (this, 20, 10);
 	this.clock = new MyClock (this);
 	this.submarine = new MySubmarine (this);
+	this.submarineRotation = 0;
+	this.submarineSpeed = 0;
 
 	// Materials
 	this.materialDefault = new CGFappearance(this);
@@ -135,7 +137,7 @@ LightingScene.prototype.display = function() {
 	//Submarine
 	this.pushMatrix();
 		this.translate (8, 0 , 8);
-		this.rotate (180 * degToRad, 0, 1, 0);
+		this.rotate (180 * degToRad + this.submarineRotation, 0, 1, 0);
 		this.submarine.display ();
 	this.popMatrix();
 
@@ -152,3 +154,13 @@ LightingScene.prototype.update = function (currTime){
 LightingScene.prototype.doSomething = function (){
 	console.log("Doing something...");
 };
+
+
+LightingScene.prototype.changeDir = function (rotation){
+	this.submarineRotation += rotation;
+};
+
+/*
+LightingScene.prototype.changeSpeed = function (){
+
+};*/

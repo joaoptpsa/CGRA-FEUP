@@ -5,6 +5,9 @@
  function MySubmarine(scene) {
 	CGFobject.call(this,scene);
 
+	this.speed = 0;
+
+
  	this.initBuffers();
  };
 
@@ -29,3 +32,14 @@
  	this.initGLBuffers();
  	
  };
+
+/*
+ MySubmarine.prototype.changeDir (){
+
+ }
+
+ 
+ MySubmarine.prototype.changeSpeed (){
+
+ }
+ */
