@@ -79,12 +79,12 @@ MyInterface.prototype.processKeyboard = function(event) {
 			break;
 		case (119): //lower case 'w'
 		case (87): //upper case 'W'
-			this.scene.changeSpeed ();
+			this.scene.changeSpeed (+this.scene.speed);
 			//this.scene.submarine.changeSpeed ();
 			break;
 		case (115): //lower case 's'
 		case (83): //upper case 'S'
-			this.scene.changeSpeed ();
+			this.scene.changeSpeed (-this.scene.speed);
 			//this.scene.submarine.changeSpeed ();
 			break;
 		default:
