@@ -2,9 +2,12 @@
  * MyTrapezoid
  * @constructor
  */
- function MyTrapezoid(scene, minS, maxS, minT, maxT) {
+ function MyTrapezoid(scene, a, b, minS, maxS, minT, maxT) {
  	CGFobject.call(this,scene);
 
+    this.a = a || 0.5;
+    this.b = b || 1;
+    
  	this.minS = minS || 0;
  	this.maxS = maxS || 1;
  	this.minT = minT || 0;
@@ -20,10 +23,10 @@
  MyTrapezoid.prototype.initBuffers = function() {
    
  	this.vertices = [
- 	-0.5, -0.5, 0,
- 	0.5, -0.5, 0,
- 	-0.25, 0.5, 0,
- 	0.25, 0.5, 0
+ 	-(this.b/2), -0.5, 0,
+ 	(this.b/2), -0.5, 0,
+ 	-(this.a/2), 0.5, 0,
+ 	(this.a/2), 0.5, 0
  	];
 
  	this.texCoords = [

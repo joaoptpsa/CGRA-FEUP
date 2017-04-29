@@ -100,7 +100,7 @@ var degToRad = Math.PI / 180.0;
 		this.scene.rotate (90*degToRad, 0, 0, 1);
 		this.scene.rotate (90*degToRad, 1, 0, 0);
 		this.materialMetal.apply();
-		//this.trapezoidalPrism.display ();
+		this.trapezoidalPrism.display ();
 	this.scene.popMatrix();
 
  };

@@ -5,10 +5,13 @@ var degToRad = Math.PI / 180.0;
  * @param gl {WebGLRenderingContext}
  * @constructor
  */
-function MyTrapezoidalPrism(scene) {
+function MyTrapezoidalPrism(scene, a, b) {
 	CGFobject.call(this,scene);
 
-	this.trapezoid= new MyTrapezoid(this.scene);
+	this.a = a || 0.5;
+    this.b = b || 1;
+
+	this.trapezoid= new MyTrapezoid(this.scene, this.a , this.b);
 	this.quad = new MyQuad (this.scene);;
 
 	this.materialMetal = new CGFappearance(this.scene);
