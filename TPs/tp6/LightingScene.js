@@ -23,7 +23,8 @@ LightingScene.prototype.init = function(application) {
 
 	this.initLights();
 
-	this.gl.clearColor(0.0, 0.0, 1.0, 1.0);
+	//this.gl.clearColor(0.0, 0.0, 1.0, 1.0);
+	this.gl.clearColor(0.0, 0.0, 0.0, 1.0);
 	this.gl.clearDepth(100.0);
 	this.gl.enable(this.gl.DEPTH_TEST);
 	this.gl.enable(this.gl.CULL_FACE);
@@ -41,6 +42,8 @@ LightingScene.prototype.init = function(application) {
 	this.submarineX = 8;
 	this.submarineY = 0;
 	this.submarineZ = 8;
+
+	this.trapezoidalPrism = new MyTrapezoidalPrism (this);
 
 	// Materials
 	this.materialDefault = new CGFappearance(this);
@@ -172,7 +175,7 @@ LightingScene.prototype.display = function() {
 
 
 	// ---- BEGIN Primitive drawing section
-
+	
 	// Ocean Plane
 	this.pushMatrix();
 		this.rotate (-90 * degToRad, 1, 0, 0);
@@ -206,6 +209,12 @@ LightingScene.prototype.display = function() {
 		this.rotate (this.submarineRotation, 0, 1, 0);
 		this.submarine.display ();
 	this.popMatrix();
+	
+	/*
+	this.pushMatrix();
+		this.trapezoidalPrism.display ();
+	this.popMatrix();
+	*/
 
 	this.setUpdatePeriod (100);
 };

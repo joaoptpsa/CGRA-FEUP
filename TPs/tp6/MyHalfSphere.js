@@ -1,8 +1,8 @@
 /**
- * MyLamp
+ * MyHalfSphere
  * @constructor
  */
- function MyLamp(scene, slices, stacks) {
+ function MyHalfSphere(scene, slices, stacks) {
  	CGFobject.call(this,scene);
 	
 	this.slices = slices;
@@ -11,10 +11,10 @@
  	this.initBuffers();
  };
 
- MyLamp.prototype = Object.create(CGFobject.prototype);
- MyLamp.prototype.constructor = MyLamp;
+ MyHalfSphere.prototype = Object.create(CGFobject.prototype);
+ MyHalfSphere.prototype.constructor = MyHalfSphere;
 
- MyLamp.prototype.initBuffers = function() {
+ MyHalfSphere.prototype.initBuffers = function() {
  	/*
  	* TODO:
  	* Replace the following lines in order to build a prism with a **single mesh**.
