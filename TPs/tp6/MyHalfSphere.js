@@ -7,6 +7,10 @@
 	
 	this.slices = slices;
 	this.stacks = stacks;
+	this.minS = 0;
+	this.maxS = 1;
+	this.minT = 0;
+	this.maxT = 1;
 
  	this.initBuffers();
  };
@@ -26,10 +30,16 @@
 	this.vertices = [];
  	this.normals = [];
  	this.indices = [];
+ 	this.texCoords = [];
 	
 	var theta=(2*Math.PI)/this.slices;
 	var vertical_theta=(Math.PI/2)/this.stacks;
 	var bottomRadius = 1;
+
+	var s = this.minS;
+	var t = this.minT;
+	var sInc = (this.maxS-this.minS)/this.slices;
+	var tInc = (this.maxT-this.minT)/this.stacks;
 
 	for (stack=0; stack<=this.stacks; stack++)
 	{
@@ -43,13 +53,14 @@
 
 			this.vertices.push (x, y ,z);
 			this.normals.push (x, y, z);
-
+			this.texCoords.push (s+ slice*sInc, t+ stack*tInc);
 		}
+		s = this.minS;
 	}
 
 	for (j=0; j<this.stacks; j++)
 	{
-			for (i=0; i<this.slices; i++)
+		for (i=0; i<this.slices; i++)
 		{
 			if (!(i==this.slices-1))
 			{

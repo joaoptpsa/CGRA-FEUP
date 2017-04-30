@@ -43,8 +43,6 @@ LightingScene.prototype.init = function(application) {
 	this.submarineY = 0;
 	this.submarineZ = 8;
 
-	this.trapezoidalPrism = new MyTrapezoidalPrism (this, 0.5, 1.0);
-
 	// Materials
 	this.materialDefault = new CGFappearance(this);
 	
@@ -175,6 +173,7 @@ LightingScene.prototype.display = function() {
 
 
 	// ---- BEGIN Primitive drawing section
+	
 	/*
 	// Ocean Plane
 	this.pushMatrix();
@@ -202,18 +201,13 @@ LightingScene.prototype.display = function() {
 		this.scale (1, 1 , 0.2);
 		this.clock.display ();
 	this.popMatrix();
+	*/
 	
 	//Submarine
 	this.pushMatrix();
 		//this.translate (this.submarineX, this.submarineY , this.submarineZ);
 		//this.rotate (this.submarineRotation, 0, 1, 0);
 		this.submarine.display ();
-	this.popMatrix();
-	*/
-	
-	this.pushMatrix();
-		this.oceanAppearance.apply();
-		this.trapezoidalPrism.display ();
 	this.popMatrix();
 	
 
