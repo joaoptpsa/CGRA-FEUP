@@ -29,7 +29,7 @@ function MyClock(scene) {
 	this.materialClock.setSpecular(0.1,0.1,0.1,1);
 	this.materialClock.setDiffuse(0.1,0.1,0.1,1);
 	this.materialClock.setShininess(1);
-	this.materialClock.loadTexture ("resources/images/wood_chair.png");
+	this.materialClock.loadTexture ("resources/images/wood_chair.jpg");
 	
 	this.materialTopOfClock = new CGFappearance(this.scene);
 	this.materialTopOfClock.setAmbient(1, 1, 1,1);

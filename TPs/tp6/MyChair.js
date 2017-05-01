@@ -12,7 +12,7 @@ function MyChair(scene) {
 	this.materialChair.setSpecular(0.1,0.1,0.1,1);
 	this.materialChair.setDiffuse(0.1,0.1,0.1,1);
 	this.materialChair.setShininess(1);
-	this.materialChair.loadTexture ("resources/images/wood_chair.png");
+	this.materialChair.loadTexture ("resources/images/wood_chair.jpg");
 
 };
 

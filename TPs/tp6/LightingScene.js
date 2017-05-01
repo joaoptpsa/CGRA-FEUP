@@ -16,15 +16,32 @@ LightingScene.prototype.init = function(application) {
 	this.luz2=true;
 	this.luz3=true;
 	this.luz4=true;
-
 	this.speed=3;
+
+	this.submarineAppearances = [[]];
+	this.submarineAppearances[0] = [];
+	this.submarineAppearances[0].push ("resources/images/metal.jpg", "resources/images/metal.jpg", "resources/images/metal.jpg");
+	this.submarineAppearances[1] = [];
+	this.submarineAppearances[1].push ("resources/images/blueCammo.jpg", "resources/images/blueCammo.jpg", "resources/images/blueCammo.jpg");
+	this.submarineAppearances[2] = [];
+	this.submarineAppearances[2].push ("resources/images/purpleCammo.png", "resources/images/diamondPlate.jpg", "resources/images/blueCammo.jpg");
+
+	this.currSubmarineAppearance = 0;
+
+	this.submarineAppearanceList = {
+		'Metallic' : 0,
+		'BlueCammo' : 1,
+		'HidingPlainSite' : 2
+	};
+
+	console.log(this.currSubmarineAppearance);
 
 	this.initCameras();
 
 	this.initLights();
 
-	//this.gl.clearColor(0.0, 0.0, 1.0, 1.0);
-	this.gl.clearColor(0.0, 0.0, 0.0, 1.0);
+	this.gl.clearColor(0.0, 0.0, 1.0, 1.0);
+	//this.gl.clearColor(0.0, 0.0, 0.0, 1.0);
 	this.gl.clearDepth(100.0);
 	this.gl.enable(this.gl.DEPTH_TEST);
 	this.gl.enable(this.gl.CULL_FACE);
@@ -174,7 +191,7 @@ LightingScene.prototype.display = function() {
 
 	// ---- BEGIN Primitive drawing section
 	
-	/*
+	
 	// Ocean Plane
 	this.pushMatrix();
 		this.rotate (-90 * degToRad, 1, 0, 0);
@@ -201,12 +218,12 @@ LightingScene.prototype.display = function() {
 		this.scale (1, 1 , 0.2);
 		this.clock.display ();
 	this.popMatrix();
-	*/
+	
 	
 	//Submarine
 	this.pushMatrix();
-		//this.translate (this.submarineX, this.submarineY , this.submarineZ);
-		//this.rotate (this.submarineRotation, 0, 1, 0);
+		this.translate (this.submarineX, this.submarineY , this.submarineZ);
+		this.rotate (this.submarineRotation, 0, 1, 0);
 		this.submarine.display ();
 	this.popMatrix();
 	
