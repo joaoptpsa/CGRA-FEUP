@@ -32,7 +32,7 @@ MyInterface.prototype.init = function(application) {
 
 	this.gui.add(this.scene, 'toggleClock');	
 
-	// add a group of controls (and open/expand by defult)
+	// add a group of controls (and open/expand by default)
 	
 	var lightGroup=this.gui.addFolder("Luzes");
 	lightGroup.open();
@@ -50,7 +50,7 @@ MyInterface.prototype.init = function(application) {
 	// this.speed=3;
 	// min and max values can be specified as parameters
 	
-	this.gui.add(this.scene, 'speed', -5, 5);
+	this.gui.add(this.scene, 'speed', -5, 5).listen();
 
 	this.gui.add(this.scene, 'currSubmarineAppearance', this.scene.submarineAppearanceList);
 
@@ -64,6 +64,8 @@ MyInterface.prototype.init = function(application) {
 MyInterface.prototype.processKeyboard = function(event) {
 	// call CGFinterface default code (omit if you want to override)
 	CGFinterface.prototype.processKeyboard.call(this,event);
+
+	var speedDelta = 0.1;
 	
 	// Check key codes e.g. here: http://www.asciitable.com/
 	// or use String.fromCharCode(event.keyCode) to compare chars
@@ -83,13 +85,11 @@ MyInterface.prototype.processKeyboard = function(event) {
 			break;
 		case (119): //lower case 'w'
 		case (87): //upper case 'W'
-			this.scene.changeSpeed (+this.scene.speed);
-			//this.scene.submarine.changeSpeed ();
+			this.scene.submarine.changeSpeed (speedDelta);
 			break;
 		case (115): //lower case 's'
 		case (83): //upper case 'S'
-			this.scene.changeSpeed (-this.scene.speed);
-			//this.scene.submarine.changeSpeed ();
+			this.scene.submarine.changeSpeed (-speedDelta);
 			break;
 		default:
 			break; 

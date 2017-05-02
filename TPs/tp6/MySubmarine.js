@@ -3,8 +3,15 @@ var degToRad = Math.PI / 180.0;
  * MySubmarine
  * @constructor
  */
- function MySubmarine(scene) {
+ function MySubmarine(scene, x, y, z) {
 	CGFobject.call(this,scene);
+	
+	var d = new Date();
+	this.oldCurrTime = d.getTime();
+	
+	this.x = x || 0;
+ 	this.y = y || 0;
+ 	this.z = z || 0;
 
 	this.cylinder = new MyCylinder (this.scene, 20, 8);
 	this.halfSphere = new MyHalfSphere (this.scene, 20, 8);
@@ -81,8 +88,6 @@ var degToRad = Math.PI / 180.0;
  MySubmarine.prototype.constructor = MySubmarine;
 
  MySubmarine.prototype.display = function() {
-	
-	console.log(this.scene.currSubmarineAppearance);
 
 	switch (parseInt(this.scene.currSubmarineAppearance)) {
 	  case 0:
@@ -142,14 +147,12 @@ var degToRad = Math.PI / 180.0;
 	//Right Helix
 	this.scene.pushMatrix();
 		this.scene.translate (0.51, -0.3, 0);
-		this.scene.rotate (0*degToRad, 1, 0, 0);
 		this.helix.display ();
 	this.scene.popMatrix();
 
 	//Left Helix
 	this.scene.pushMatrix();
 		this.scene.translate (-0.51, -0.3, 0);
-		this.scene.rotate (0*degToRad, 0, 0, 1);
 		this.helix.display ();
 	this.scene.popMatrix();
 
@@ -234,13 +237,35 @@ var degToRad = Math.PI / 180.0;
 
  };
 
+MySubmarine.prototype.changeSpeed = function (speedDelta){
+	if (this.scene.speed+speedDelta<=5 && this.scene.speed+speedDelta>=-5){
+		this.scene.speed += speedDelta;
+	}
+};
+
+MySubmarine.prototype.translateToPos = function(){
+	this.scene.translate (this.x, this.y, this.z);
+};
+
+MySubmarine.prototype.update = function(currTime){
+	var deltaTime = currTime - this.oldCurrTime;
+	this.oldCurrTime = currTime;
+
+	// deltaTime / 1000 == change in seconds 
+	console.log(deltaTime/1000);
+
+	this.updatePos(deltaTime);
+	this.helix.updateHelixAngle(deltaTime); //in practice our "helixes" are just one
+};
+
+MySubmarine.prototype.updatePos = function(deltaTime){
+	this.x += ((this.scene.speed/10)*Math.sin (this.scene.submarineAngle))* (deltaTime/1000);
+	this.z += ((this.scene.speed/10)*Math.cos (this.scene.submarineAngle))* (deltaTime/1000);
+};
+
+
 /*
- MySubmarine.prototype.changeDir (){
-
- }
-
- 
- MySubmarine.prototype.changeSpeed (){
-
- }
- */
+MySubmarine.prototype.rotateSub = function(){
+	this.scene.rotate (this.submarineRotation, 0, 1, 0);
+};
+*/

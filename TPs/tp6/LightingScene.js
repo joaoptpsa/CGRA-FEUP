@@ -53,12 +53,9 @@ LightingScene.prototype.init = function(application) {
 	this.oceanPlane = new Plane (this, OCEAN_DIVISIONS);
 	this.pole = new MyCylinder (this, 20, 10);
 	this.clock = new MyClock (this);
-	this.submarine = new MySubmarine (this);
+	this.submarine = new MySubmarine (this, 8, 0, 8);
 	this.submarineRotation = 180 * degToRad;
 	this.submarineAngle = this.submarineRotation;
-	this.submarineX = 8;
-	this.submarineY = 0;
-	this.submarineZ = 8;
 
 	// Materials
 	this.materialDefault = new CGFappearance(this);
@@ -222,7 +219,7 @@ LightingScene.prototype.display = function() {
 	
 	//Submarine
 	this.pushMatrix();
-		this.translate (this.submarineX, this.submarineY , this.submarineZ);
+		this.submarine.translateToPos();
 		this.rotate (this.submarineRotation, 0, 1, 0);
 		this.submarine.display ();
 	this.popMatrix();
@@ -236,6 +233,8 @@ LightingScene.prototype.update = function (currTime){
 	if (this.clock.running){
 		this.clock.update(currTime);
 	}
+	
+	this.submarine.update(currTime);
 
 };
 
@@ -248,11 +247,4 @@ LightingScene.prototype.toggleClock = function (){
 LightingScene.prototype.changeDir = function (rotation){
 	this.submarineRotation += rotation;
 	this.submarineAngle += rotation;
-};
-
-
-LightingScene.prototype.changeSpeed = function (speed){
-	this.submarineX += (speed/30) * Math.sin (this.submarineAngle);
-	this.submarineZ += (speed/30) * Math.cos (this.submarineAngle);
-
 };
