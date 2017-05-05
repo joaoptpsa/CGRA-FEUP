@@ -14,6 +14,9 @@ var degToRad = Math.PI / 180.0;
  	this.z = z || 0;
 
 	this.angle = angle * degToRad;
+	this.verticalRudderAngle = 0;
+	this.rudderMaxAngle = Math.PI/6;
+	this.rudderAngleDelta = this.rudderMaxAngle/50;
 
 	this.cylinder = new MyCylinder (this.scene, 20, 8);
 	this.halfSphere = new MyHalfSphere (this.scene, 20, 8);
@@ -131,6 +134,7 @@ var degToRad = Math.PI / 180.0;
 
 	//Vertical Back Trapezoid
 	this.scene.pushMatrix();
+		this.rotateVerticalRudder ();
 		this.scene.translate (0, 0, -0.125);
 		this.scene.scale (1, 1 , 0.25);
 		this.scene.rotate (90*degToRad, 0, 0, 1);
@@ -254,10 +258,10 @@ MySubmarine.prototype.update = function(currTime){
 	this.oldCurrTime = currTime;
 
 	// deltaTime / 1000 == change in seconds 
-	console.log(deltaTime/1000);
 
 	this.updatePos(deltaTime);
 	this.helix.updateHelixAngle(deltaTime); //in practice our "helixes" are just one
+	//this.updateRudderAngle (this.rudderMaxAngle, this.rudderMaxAngle*(deltaTime/1000), 1);
 };
 
 MySubmarine.prototype.updatePos = function(deltaTime){
@@ -274,5 +278,36 @@ MySubmarine.prototype.rotateSub = function(factor){
 	var rotationDelta;
 	rotationDelta = (this.scene.speed/10) * factor;
 	this.angle += rotationDelta;
-	
+};
+
+MySubmarine.prototype.rotateVerticalRudder = function(){
+	this.scene.rotate (this.verticalRudderAngle, 0, 1, 0);
+};
+
+
+MySubmarine.prototype.updateRudderAngle = function(maxAngle, rudderRotation, reset){
+
+	if (reset && this.verticalRudderAngle!=0){
+		if (this.verticalRudderAngle>0){
+			if ((this.verticalRudderAngle-Math.abs(rudderRotation))>0){
+				this.verticalRudderAngle -= Math.abs(rudderRotation);
+			}
+			else{
+				this.verticalRudderAngle =0;
+			}
+		}
+		else if (this.verticalRudderAngle<0){
+			if ((this.verticalRudderAngle+Math.abs(rudderRotation))<0) {
+				this.verticalRudderAngle += Math.abs(rudderRotation);
+			}
+			else{
+				this.verticalRudderAngle =0;
+			}
+		}
+	}
+	else{
+		if (!(Math.abs(this.verticalRudderAngle+rudderRotation)>=maxAngle)){
+			this.verticalRudderAngle += rudderRotation;
+		}
+	}
 };

@@ -66,10 +66,11 @@ MyInterface.prototype.processKeyboard = function(event) {
 	CGFinterface.prototype.processKeyboard.call(this,event);
 
 	var speedDelta = 0.1;
-	var rotationFactor = Math.PI/150
+	var rotationFactor = Math.PI/150;
 	
 	// Check key codes e.g. here: http://www.asciitable.com/
 	// or use String.fromCharCode(event.keyCode) to compare chars
+
 	
 	// for better cross-browser support, you may also check suggestions on using event.which in http://www.w3schools.com/jsref/event_key_keycode.asp
 	switch (event.keyCode)
@@ -77,10 +78,12 @@ MyInterface.prototype.processKeyboard = function(event) {
 		case (97): //lower case 'a'
 		case (65): //upper case 'A'
 			this.scene.submarine.rotateSub (rotationFactor);
+			this.scene.submarine.updateRudderAngle (this.scene.submarine.rudderMaxAngle, -this.scene.submarine.rudderAngleDelta, 0);
 			break;
 		case (100): //lower case 'd'
 		case (68): //upper case 'D'
 			this.scene.submarine.rotateSub (-rotationFactor);
+			this.scene.submarine.updateRudderAngle (this.scene.submarine.rudderMaxAngle, this.scene.submarine.rudderAngleDelta, 0);
 			break;
 		case (119): //lower case 'w'
 		case (87): //upper case 'W'
