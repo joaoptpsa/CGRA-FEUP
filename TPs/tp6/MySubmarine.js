@@ -3,7 +3,7 @@ var degToRad = Math.PI / 180.0;
  * MySubmarine
  * @constructor
  */
- function MySubmarine(scene, x, y, z) {
+ function MySubmarine(scene, x, y, z, angle) {
 	CGFobject.call(this,scene);
 	
 	var d = new Date();
@@ -12,6 +12,8 @@ var degToRad = Math.PI / 180.0;
 	this.x = x || 0;
  	this.y = y || 0;
  	this.z = z || 0;
+
+	this.angle = angle * degToRad;
 
 	this.cylinder = new MyCylinder (this.scene, 20, 8);
 	this.halfSphere = new MyHalfSphere (this.scene, 20, 8);
@@ -259,13 +261,18 @@ MySubmarine.prototype.update = function(currTime){
 };
 
 MySubmarine.prototype.updatePos = function(deltaTime){
-	this.x += ((this.scene.speed/10)*Math.sin (this.scene.submarineAngle))* (deltaTime/1000);
-	this.z += ((this.scene.speed/10)*Math.cos (this.scene.submarineAngle))* (deltaTime/1000);
+	this.x += ((this.scene.speed/10)*Math.sin (this.angle))* (deltaTime/1000);
+	this.z += ((this.scene.speed/10)*Math.cos (this.angle))* (deltaTime/1000);
 };
 
 
-/*
-MySubmarine.prototype.rotateSub = function(){
-	this.scene.rotate (this.submarineRotation, 0, 1, 0);
+MySubmarine.prototype.updateRotation = function(){
+	this.scene.rotate (this.angle, 0, 1, 0);
 };
-*/
+
+MySubmarine.prototype.rotateSub = function(factor){
+	var rotationDelta;
+	rotationDelta = (this.scene.speed/10) * factor;
+	this.angle += rotationDelta;
+	
+};

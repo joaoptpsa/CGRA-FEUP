@@ -66,6 +66,7 @@ MyInterface.prototype.processKeyboard = function(event) {
 	CGFinterface.prototype.processKeyboard.call(this,event);
 
 	var speedDelta = 0.1;
+	var rotationFactor = Math.PI/150
 	
 	// Check key codes e.g. here: http://www.asciitable.com/
 	// or use String.fromCharCode(event.keyCode) to compare chars
@@ -75,13 +76,11 @@ MyInterface.prototype.processKeyboard = function(event) {
 	{
 		case (97): //lower case 'a'
 		case (65): //upper case 'A'
-			this.scene.changeDir (Math.PI/30);
-			//this.scene.submarine.changeDir ();
+			this.scene.submarine.rotateSub (rotationFactor);
 			break;
 		case (100): //lower case 'd'
 		case (68): //upper case 'D'
-			this.scene.changeDir (-Math.PI/30);
-			//this.scene.submarine.changeDir ();
+			this.scene.submarine.rotateSub (-rotationFactor);
 			break;
 		case (119): //lower case 'w'
 		case (87): //upper case 'W'
