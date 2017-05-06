@@ -16,7 +16,7 @@ var degToRad = Math.PI / 180.0;
 	this.angle = angle * degToRad;
 	this.verticalRudderAngle = 0;
 	this.rudderMaxAngle = Math.PI/6;
-	this.rudderAngleDelta = this.rudderMaxAngle/50;
+	this.rudderAngleDelta = this.rudderMaxAngle/20;
 
 	this.cylinder = new MyCylinder (this.scene, 20, 8);
 	this.halfSphere = new MyHalfSphere (this.scene, 20, 8);
@@ -261,7 +261,7 @@ MySubmarine.prototype.update = function(currTime){
 
 	this.updatePos(deltaTime);
 	this.helix.updateHelixAngle(deltaTime); //in practice our "helixes" are just one
-	//this.updateRudderAngle (this.rudderMaxAngle, this.rudderMaxAngle*(deltaTime/1000), 1);
+	this.updateRudderAngle (this.rudderMaxAngle, (this.rudderMaxAngle*0.5)*(deltaTime/1000), 1); //Takes two seconds to reset
 };
 
 MySubmarine.prototype.updatePos = function(deltaTime){
@@ -305,7 +305,8 @@ MySubmarine.prototype.updateRudderAngle = function(maxAngle, rudderRotation, res
 			}
 		}
 	}
-	else{
+	else if (!reset)
+	{
 		if (!(Math.abs(this.verticalRudderAngle+rudderRotation)>=maxAngle)){
 			this.verticalRudderAngle += rudderRotation;
 		}
