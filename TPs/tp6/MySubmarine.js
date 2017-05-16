@@ -13,8 +13,8 @@ var degToRad = Math.PI / 180.0;
  	this.y = y || 0;
  	this.z = z || 0;
 
-	this.rotationAngle = rotationAngle*degToRad;
-	this.verticalAngle = verticalAngle*degToRad;
+	this.rotationAngle = rotationAngle*degToRad || 0;
+	this.verticalAngle = verticalAngle*degToRad || 0;
 	this.maxVerticalAngle = 30*degToRad;
 	this.verticalRudderAngle = 0;
 	this.horizontalRudderAngle = 0;
@@ -271,14 +271,16 @@ MySubmarine.prototype.update = function(currTime){
 
 MySubmarine.prototype.updatePos = function(deltaTime){
 	this.x += ((this.scene.speed/10)*Math.sin (this.rotationAngle))* (deltaTime/1000);
-	this.y += ((this.scene.speed/10)*Math.sin (this.verticalAngle))* (deltaTime/1000);
+	this.y += ((this.scene.speed/10)*Math.sin (-this.verticalAngle))* (deltaTime/1000); //-this.verticalAngle because we start it off as 0 and due to the way the trigonometic circle works we want (180-this.verticalAngle)
 	this.z += ((this.scene.speed/10)*Math.cos (this.rotationAngle))* (deltaTime/1000);
 };
 
 
 MySubmarine.prototype.updateRotation = function(){
+	//this.scene.rotate (this.rotationAngle, 0, Math.cos(this.verticalAngle), -Math.sin(this.verticalAngle)); //Uncomment to make the submarine rotate on its "butt" axis
+	this.scene.rotate (this.rotationAngle, 0, 1, 0); //Uncomment to make the submarine rotate always in the y axis
 	this.scene.rotate (this.verticalAngle, 1, 0, 0);
-	this.scene.rotate (this.rotationAngle, 0, 1, 0);
+	
 };
 
 MySubmarine.prototype.rotateSubHor = function(factor){

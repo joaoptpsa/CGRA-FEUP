@@ -95,12 +95,14 @@ MyInterface.prototype.processKeyboard = function(event) {
 			break;
 		case (113): //lower case 'q'
 		case (81): //upper case 'Q'
-			this.scene.submarine.rotateSubVer (rotationFactor);
+			//Go up
+			this.scene.submarine.rotateSubVer (-rotationFactor); //send negative because the rotation goes counter-clockwise like a "pi" circle
 			this.scene.submarine.updateHorizontalRudderAngle (this.scene.submarine.rudderMaxAngle, this.scene.submarine.rudderAngleDelta, 0);
 			break;
 		case (101): //lower case 'e'
 		case (69): //upper case 'E'
-			this.scene.submarine.rotateSubVer (-rotationFactor);
+			//Go down
+			this.scene.submarine.rotateSubVer (rotationFactor);
 			this.scene.submarine.updateHorizontalRudderAngle (this.scene.submarine.rudderMaxAngle, -this.scene.submarine.rudderAngleDelta, 0);
 			break;
 		default:

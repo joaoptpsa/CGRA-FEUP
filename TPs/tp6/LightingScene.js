@@ -17,7 +17,8 @@ LightingScene.prototype.init = function(application) {
 	this.luz3=true;
 	this.luz4=true;
 	this.speed=3;
-
+	//this.speed=0;
+	
 	this.submarineAppearances = [[]];
 	this.submarineAppearances[0] = [];
 	this.submarineAppearances[0].push ("resources/images/metal.jpg", "resources/images/metal.jpg", "resources/images/metal.jpg");
@@ -54,6 +55,7 @@ LightingScene.prototype.init = function(application) {
 	this.pole = new MyCylinder (this, 20, 10);
 	this.clock = new MyClock (this);
 	this.submarine = new MySubmarine (this, 8, 0, 8, 180, 0);
+	//this.submarine = new MySubmarine (this, 0, 0, 0, 0, 0);
 
 	// Materials
 	this.materialDefault = new CGFappearance(this);
@@ -213,7 +215,6 @@ LightingScene.prototype.display = function() {
 		this.scale (1, 1 , 0.2);
 		this.clock.display ();
 	this.popMatrix();
-	
 	
 	//Submarine
 	this.pushMatrix();
