@@ -53,7 +53,7 @@ LightingScene.prototype.init = function(application) {
 	this.oceanPlane = new Plane (this, OCEAN_DIVISIONS);
 	this.pole = new MyCylinder (this, 20, 10);
 	this.clock = new MyClock (this);
-	this.submarine = new MySubmarine (this, 8, 0, 8, 180);
+	this.submarine = new MySubmarine (this, 8, 0, 8, 180, 0);
 
 	// Materials
 	this.materialDefault = new CGFappearance(this);

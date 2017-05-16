@@ -3,7 +3,7 @@ var degToRad = Math.PI / 180.0;
  * MySubmarine
  * @constructor
  */
- function MySubmarine(scene, x, y, z, angle) {
+ function MySubmarine(scene, x, y, z, rotationAngle, verticalAngle) {
 	CGFobject.call(this,scene);
 	
 	var d = new Date();
@@ -13,8 +13,11 @@ var degToRad = Math.PI / 180.0;
  	this.y = y || 0;
  	this.z = z || 0;
 
-	this.angle = angle * degToRad;
+	this.rotationAngle = rotationAngle*degToRad;
+	this.verticalAngle = verticalAngle*degToRad;
+	this.maxVerticalAngle = 30*degToRad;
 	this.verticalRudderAngle = 0;
+	this.horizontalRudderAngle = 0;
 	this.rudderMaxAngle = Math.PI/6;
 	this.rudderAngleDelta = this.rudderMaxAngle/20;
 
@@ -144,6 +147,7 @@ var degToRad = Math.PI / 180.0;
 
 	//Horizontal Back Trapezoid
 	this.scene.pushMatrix();
+		this.rotateHorizontalRudder();44
 		this.scene.translate (0, 0, -0.125);
 		this.scene.scale (1, 1 , 0.25);
 		this.scene.rotate (90*degToRad, 1, 0, 0);
@@ -261,31 +265,43 @@ MySubmarine.prototype.update = function(currTime){
 
 	this.updatePos(deltaTime);
 	this.helix.updateHelixAngle(deltaTime); //in practice our "helixes" are just one
-	this.updateRudderAngle (this.rudderMaxAngle, (this.rudderMaxAngle*0.5)*(deltaTime/1000), 1); //Takes two seconds to reset
+	this.updateVerticalRudderAngle (this.rudderMaxAngle, (this.rudderMaxAngle*0.5)*(deltaTime/1000), 1); //Takes two seconds to reset
+	this.updateHorizontalRudderAngle (this.rudderMaxAngle, (this.rudderMaxAngle*0.5)*(deltaTime/1000), 1); //Takes two seconds to reset
 };
 
 MySubmarine.prototype.updatePos = function(deltaTime){
-	this.x += ((this.scene.speed/10)*Math.sin (this.angle))* (deltaTime/1000);
-	this.z += ((this.scene.speed/10)*Math.cos (this.angle))* (deltaTime/1000);
+	this.x += ((this.scene.speed/10)*Math.sin (this.rotationAngle))* (deltaTime/1000);
+	this.y += ((this.scene.speed/10)*Math.sin (this.verticalAngle))* (deltaTime/1000);
+	this.z += ((this.scene.speed/10)*Math.cos (this.rotationAngle))* (deltaTime/1000);
 };
 
 
 MySubmarine.prototype.updateRotation = function(){
-	this.scene.rotate (this.angle, 0, 1, 0);
+	this.scene.rotate (this.verticalAngle, 1, 0, 0);
+	this.scene.rotate (this.rotationAngle, 0, 1, 0);
 };
 
-MySubmarine.prototype.rotateSub = function(factor){
+MySubmarine.prototype.rotateSubHor = function(factor){
 	var rotationDelta;
 	rotationDelta = (this.scene.speed/10) * factor;
-	this.angle += rotationDelta;
+	this.rotationAngle += rotationDelta;
 };
+
+MySubmarine.prototype.rotateSubVer =  function(factor){
+	var rotationDelta;
+	rotationDelta = (this.scene.speed/10) * factor;
+
+	if (Math.abs(this.verticalAngle+rotationDelta) < this.maxVerticalAngle){
+		this.verticalAngle += rotationDelta;
+	}
+}
 
 MySubmarine.prototype.rotateVerticalRudder = function(){
 	this.scene.rotate (this.verticalRudderAngle, 0, 1, 0);
 };
 
 
-MySubmarine.prototype.updateRudderAngle = function(maxAngle, rudderRotation, reset){
+MySubmarine.prototype.updateVerticalRudderAngle = function(maxAngle, rudderRotation, reset){
 
 	if (reset && this.verticalRudderAngle!=0){
 		if (this.verticalRudderAngle>0){
@@ -309,6 +325,38 @@ MySubmarine.prototype.updateRudderAngle = function(maxAngle, rudderRotation, res
 	{
 		if (!(Math.abs(this.verticalRudderAngle+rudderRotation)>=maxAngle)){
 			this.verticalRudderAngle += rudderRotation;
+		}
+	}
+};
+
+MySubmarine.prototype.rotateHorizontalRudder = function(){
+	this.scene.rotate (this.horizontalRudderAngle, 1, 0, 0);
+};
+
+MySubmarine.prototype.updateHorizontalRudderAngle = function(maxAngle, rudderRotation, reset){
+
+	if (reset && this.horizontalRudderAngle!=0){
+		if (this.horizontalRudderAngle>0){
+			if ((this.horizontalRudderAngle-Math.abs(rudderRotation))>0){
+				this.horizontalRudderAngle -= Math.abs(rudderRotation);
+			}
+			else{
+				this.horizontalRudderAngle =0;
+			}
+		}
+		else if (this.horizontalRudderAngle<0){
+			if ((this.horizontalRudderAngle+Math.abs(rudderRotation))<0) {
+				this.horizontalRudderAngle += Math.abs(rudderRotation);
+			}
+			else{
+				this.horizontalRudderAngle =0;
+			}
+		}
+	}
+	else if (!reset)
+	{
+		if (!(Math.abs(this.horizontalRudderAngle+rudderRotation)>=maxAngle)){
+			this.horizontalRudderAngle += rudderRotation;
 		}
 	}
 };

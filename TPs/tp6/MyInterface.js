@@ -77,13 +77,13 @@ MyInterface.prototype.processKeyboard = function(event) {
 	{
 		case (97): //lower case 'a'
 		case (65): //upper case 'A'
-			this.scene.submarine.rotateSub (rotationFactor);
-			this.scene.submarine.updateRudderAngle (this.scene.submarine.rudderMaxAngle, -this.scene.submarine.rudderAngleDelta, 0);
+			this.scene.submarine.rotateSubHor (rotationFactor);
+			this.scene.submarine.updateVerticalRudderAngle (this.scene.submarine.rudderMaxAngle, -this.scene.submarine.rudderAngleDelta, 0);
 			break;
 		case (100): //lower case 'd'
 		case (68): //upper case 'D'
-			this.scene.submarine.rotateSub (-rotationFactor);
-			this.scene.submarine.updateRudderAngle (this.scene.submarine.rudderMaxAngle, this.scene.submarine.rudderAngleDelta, 0);
+			this.scene.submarine.rotateSubHor (-rotationFactor);
+			this.scene.submarine.updateVerticalRudderAngle (this.scene.submarine.rudderMaxAngle, this.scene.submarine.rudderAngleDelta, 0);
 			break;
 		case (119): //lower case 'w'
 		case (87): //upper case 'W'
@@ -92,6 +92,16 @@ MyInterface.prototype.processKeyboard = function(event) {
 		case (115): //lower case 's'
 		case (83): //upper case 'S'
 			this.scene.submarine.changeSpeed (-speedDelta);
+			break;
+		case (113): //lower case 'q'
+		case (81): //upper case 'Q'
+			this.scene.submarine.rotateSubVer (rotationFactor);
+			this.scene.submarine.updateHorizontalRudderAngle (this.scene.submarine.rudderMaxAngle, this.scene.submarine.rudderAngleDelta, 0);
+			break;
+		case (101): //lower case 'e'
+		case (69): //upper case 'E'
+			this.scene.submarine.rotateSubVer (-rotationFactor);
+			this.scene.submarine.updateHorizontalRudderAngle (this.scene.submarine.rudderMaxAngle, -this.scene.submarine.rudderAngleDelta, 0);
 			break;
 		default:
 			break; 
