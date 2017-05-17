@@ -105,6 +105,14 @@ MyInterface.prototype.processKeyboard = function(event) {
 			this.scene.submarine.rotateSubVer (rotationFactor);
 			this.scene.submarine.updateHorizontalRudderAngle (this.scene.submarine.rudderMaxAngle, -this.scene.submarine.rudderAngleDelta, 0);
 			break;
+		case (112): //lower case 'p'
+		case (80): //upper case 'P'
+			this.scene.submarine.periscope.updatePeriscopeHeight (this.scene.submarine.periscopeMaxMinHeight, this.scene.submarine.periscopeYDelta);
+			break;
+		case (108): //lower case 'l'
+		case (76): //upper case 'L'
+			this.scene.submarine.periscope.updatePeriscopeHeight (this.scene.submarine.periscopeMaxMinHeight, -this.scene.submarine.periscopeYDelta);
+			break;
 		default:
 			break; 
 	};

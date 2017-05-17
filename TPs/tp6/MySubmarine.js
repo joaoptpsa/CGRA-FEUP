@@ -15,11 +15,15 @@ var degToRad = Math.PI / 180.0;
 
 	this.rotationAngle = rotationAngle*degToRad || 0;
 	this.verticalAngle = verticalAngle*degToRad || 0;
+	
 	this.maxVerticalAngle = 30*degToRad;
 	this.verticalRudderAngle = 0;
 	this.horizontalRudderAngle = 0;
 	this.rudderMaxAngle = Math.PI/6;
 	this.rudderAngleDelta = this.rudderMaxAngle/20;
+
+	this.periscopeMaxMinHeight = -0.8 //minimum height periscope will go down to, the periscope has a height of 0.95
+	this.periscopeYDelta = Math.abs(this.periscopeMaxMinHeight)/20;
 
 	this.cylinder = new MyCylinder (this.scene, 20, 8);
 	this.halfSphere = new MyHalfSphere (this.scene, 20, 8);
@@ -27,6 +31,7 @@ var degToRad = Math.PI / 180.0;
 	this.rudderTrapezoidalPrism = new MyTrapezoidalPrism (this.scene, 1.64, 2.34);
 	this.towerTrapezoidalPrism = new MyTrapezoidalPrism (this.scene, 1, 1.42);
 	this.helix = new MySubmarineHelix (this.scene);
+	this.periscope = new MySubmarinePeriscope (this.scene);
 
 	this.bodyAppearance1 = new CGFappearance(this.scene);
 	this.bodyAppearance1.setAmbient(0.33, 0.33, 0.33, 1);
@@ -221,28 +226,11 @@ var degToRad = Math.PI / 180.0;
 		break;
 	}
 
-	//Vertical Periscope
+	//Periscope
 	this.scene.pushMatrix();
+		this.periscope.translateToPos();
 		this.scene.translate (0, 0.5+0.57, 2.2);
-		this.scene.scale (0.05, 1 , 0.05);
-		this.scene.rotate (270*degToRad, 1, 0 ,0);
-		this.cylinder.display ();
-	this.scene.popMatrix();
-
-	//Horizontal Periscope
-	this.scene.pushMatrix();
-		this.scene.translate (0, (0.5+0.57 + 1 - 0.05), (2.2-0.05));
-		this.scene.scale (0.05, 0.05 , 0.2);
-		//this.scene.rotate (0*degToRad, 1, 0 ,0);
-		this.cylinder.display ();
-	this.scene.popMatrix();
-
-	//Horizontal Periscope Face
-	this.scene.pushMatrix();
-		this.scene.translate (0, (0.5+0.57 + 1 - 0.05), (2.2-0.05 + 0.2));
-		this.scene.scale (0.05, 0.05 , 1);
-		//this.scene.rotate (0*degToRad, 1, 0 ,0);
-		this.circle.display ();
+		this.periscope.display ();
 	this.scene.popMatrix();
 
  };

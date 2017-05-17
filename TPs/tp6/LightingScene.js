@@ -16,8 +16,8 @@ LightingScene.prototype.init = function(application) {
 	this.luz2=true;
 	this.luz3=true;
 	this.luz4=true;
-	this.speed=3;
-	//this.speed=0;
+	//this.speed=3;
+	this.speed=0;
 	
 	this.submarineAppearances = [[]];
 	this.submarineAppearances[0] = [];
@@ -54,8 +54,8 @@ LightingScene.prototype.init = function(application) {
 	this.oceanPlane = new Plane (this, OCEAN_DIVISIONS);
 	this.pole = new MyCylinder (this, 20, 10);
 	this.clock = new MyClock (this);
-	this.submarine = new MySubmarine (this, 8, 0, 8, 180, 0);
-	//this.submarine = new MySubmarine (this, 0, 0, 0, 0, 0);
+	this.submarine = new MySubmarine (this, 8, 2, 8, 180, 0);
+	//this.submarine = new MySubmarine (this, 0, 2, 0, 0, 0);
 
 	// Materials
 	this.materialDefault = new CGFappearance(this);
