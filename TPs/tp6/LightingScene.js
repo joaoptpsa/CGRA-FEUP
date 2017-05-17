@@ -2,6 +2,8 @@ var degToRad = Math.PI / 180.0;
 
 var OCEAN_DIVISIONS = 150;
 
+var NUM_TARGETS = 1;
+
 function LightingScene() {
 	CGFscene.call(this);
 }
@@ -56,6 +58,11 @@ LightingScene.prototype.init = function(application) {
 	this.clock = new MyClock (this);
 	this.submarine = new MySubmarine (this, 8, 2, 8, 180, 0);
 	//this.submarine = new MySubmarine (this, 0, 2, 0, 0, 0);
+
+	this.targets = [];
+	for (var i=0; i<NUM_TARGETS; i++){
+		this.targets.push (new MyTarget (this, 2, 3, 2)); //change values to random in interval
+	}
 
 	// Materials
 	this.materialDefault = new CGFappearance(this);
@@ -222,6 +229,15 @@ LightingScene.prototype.display = function() {
 		this.submarine.updateRotation ();
 		this.submarine.display ();
 	this.popMatrix();
+
+	//Targets
+	for (var i=0; i<NUM_TARGETS; i++){
+		this.pushMatrix();
+			//this.submarine.translateToPos();
+			//this.submarine.updateRotation ();
+			this.targets[i].display ();
+		this.popMatrix();
+	};
 	
 
 	this.setUpdatePeriod (100);

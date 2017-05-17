@@ -5,6 +5,7 @@ serialInclude=function(a){var b=console,c=serialInclude.l;if(a.length>0)c.splice
 serialInclude([
 	'../lib/CGF.js',
 	'LightingScene.js',
+	'MyTriangle.js',
 	'MyQuad.js',
 	'MyUnitCubeQuad.js',
 	'MyChair.js',
@@ -24,7 +25,8 @@ serialInclude([
 	'MyTrapezoidalPrism.js',
 	'MyParallelipiped.js',
 	'MyTwoFacedCylinder.js',
-	'MyTarget',
+	'MyTarget.js',
+	'MyFish.js',
 
 	main=function() {
 		var app = new CGFapplication(document.body);
