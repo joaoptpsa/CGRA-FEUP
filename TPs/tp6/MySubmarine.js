@@ -358,7 +358,13 @@ MySubmarine.prototype.updateHorizontalRudderAngle = function(maxAngle, rudderRot
 
 
 MySubmarine.prototype.createTorpedo = function(){
+	//kinda like singleton
 	if (this.torpedo === null){
-		this.torpedo = new MyTorpedo (this.scene, this.x, this.y-0.5-0.1, this.z-2, this.rotationAngle*radToDeg, this.verticalAngle*radToDeg);
+		this.torpedo = new MyTorpedo (this.scene, this.x, this.y-0.5-0.1, this.z-(4.08/2)+0.025, this.rotationAngle*radToDeg, this.verticalAngle*radToDeg);
+
+		//if there are targets we should assign the first one to the torpedo
+		if (this.scene.targets[0] != null){
+			this.torpedo.target = this.scene.targets[0];
+		}
 	}
 };
