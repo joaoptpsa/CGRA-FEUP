@@ -2,8 +2,11 @@
  * MyTriangle
  * @constructor
  */
- function MyTriangle(scene, minS, maxS, minT, maxT) {
+ function MyTriangle(scene, base, height, minS, maxS, minT, maxT) {
  	CGFobject.call(this,scene);
+  
+    this.base = base || 1;
+    this.height = height || 1;
 
  	this.minS = minS || 0;
  	this.maxS = maxS || 1;
@@ -19,9 +22,9 @@
 
  MyTriangle.prototype.initBuffers = function() {
  	this.vertices = [
- 	-0.5, 0, 0,
- 	0.5, 0, 0,
- 	0, 1, 0,
+ 	-this.base/2, -this.height/2, 0,
+ 	this.base/2, -this.height/2, 0,
+ 	0, this.height/2, 0,
  	];
 
  	this.texCoords = [

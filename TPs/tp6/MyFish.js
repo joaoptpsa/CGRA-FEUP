@@ -8,22 +8,22 @@ var degToRad = Math.PI / 180.0;
 function MyFish(scene) {
 	CGFobject.call(this,scene);
 
-	this.circle = new MyCircle (this.scene, 20, 1);
-	this.triangle = new MyTriangle (this.scene);
+	this.circle = new MyCircle (this.scene, 20, 0.5); //radius = 0.5 ; diameter = 1
+	this.triangle = new MyTriangle (this.scene, 0.5, 0.2); //base = 0.5 ; height = 0.2
 	
 	this.materialBody = new CGFappearance(this.scene);
 	this.materialBody.setAmbient(0.6, 0.32, 0.004,1);
 	this.materialBody.setSpecular(0.1,0.1,0.1,1);
 	this.materialBody.setDiffuse(0.8,0.8,0.8,1);
 	this.materialBody.setShininess(10);
-	this.materialBody.loadTexture("resources/images/table.png");
+	//this.materialBody.loadTexture("resources/images/table.png");
 
 	this.materialTail = new CGFappearance(this.scene);
 	this.materialTail.setAmbient(0.6, 0.32, 0.004,1);
 	this.materialTail.setSpecular(0.1,0.1,0.1,1);
 	this.materialTail.setDiffuse(0.8,0.8,0.8,1);
 	this.materialTail.setShininess(10);
-	this.materialTail.loadTexture("resources/images/table.png");
+	//this.materialTail.loadTexture("resources/images/table.png");
 	
 };
 
@@ -33,15 +33,15 @@ MyFish.prototype.constructor=MyFish;
 MyFish.prototype.display = function () {
 	// Body 
 	this.scene.pushMatrix();
-		//this.scene.translate(2.35,1.75,1.35);
-		//this.scene.scale(0.3,3.5,0.3);
+		this.scene.rotate (90*degToRad, 0, 0, 1); //so it stands horizontal
+		this.scene.scale(0.4,1,1);
 		//this.materialBody.apply();
 		this.circle.display();
 	this.scene.popMatrix();
 
 	this.scene.pushMatrix();
-		//this.scene.translate(2.35,1.75,1.35);
-		//this.scene.scale(0.3,3.5,0.3);
+		this.scene.rotate (90*degToRad, 0, 0, 1); //so it stands horizontal
+		this.scene.scale(0.4,1,1);
 		this.scene.rotate (180*degToRad, 1, 0, 0);
 		//this.materialBody.apply();
 		this.circle.display();
@@ -49,14 +49,16 @@ MyFish.prototype.display = function () {
 	
 	//Tail
 	this.scene.pushMatrix();
-		//this.scene.scale(0.3,3.5,0.3);
+		this.scene.rotate (90*degToRad, 0, 0, 1); //so it stands horizontal
+		this.scene.translate(0,-0.55,0); //0.55 instead of 0.6 so the tail blends a bit with the body
 		//this.materialTail.apply();
 		this.triangle.display();
 	this.scene.popMatrix();
 
 	this.scene.pushMatrix();
-		//this.scene.scale(0.3,3.5,0.3);
-		this.scene.rotate (180*degToRad, 1, 0, 0);
+		this.scene.rotate (90*degToRad, 0, 0, 1); //so it stands horizontal
+		this.scene.translate(0,-0.55,0);
+		this.scene.rotate (180*degToRad, 0, 1, 0);
 		//this.materialTail.apply();
 		this.triangle.display();
 	this.scene.popMatrix();

@@ -57,7 +57,7 @@ LightingScene.prototype.init = function(application) {
 	this.pole = new MyCylinder (this, 20, 10);
 	this.clock = new MyClock (this);
 	this.submarine = new MySubmarine (this, 8, 2, 8, 180, 0);
-	//this.submarine = new MySubmarine (this, 0, 2, 0, 0, 0);
+	this.torpedo = new MyTorpedo (this, 4, 4, 4, 0, 0);
 
 	this.targets = [];
 	for (var i=0; i<NUM_TARGETS; i++){
@@ -233,11 +233,16 @@ LightingScene.prototype.display = function() {
 	//Targets
 	for (var i=0; i<NUM_TARGETS; i++){
 		this.pushMatrix();
-			//this.submarine.translateToPos();
-			//this.submarine.updateRotation ();
 			this.targets[i].display ();
 		this.popMatrix();
 	};
+	
+	//Torpedo *for moddeling*
+	this.pushMatrix();
+		this.torpedo.translateToPos();
+		this.torpedo.updateRotation ();
+		this.torpedo.display ();
+	this.popMatrix();
 	
 
 	this.setUpdatePeriod (100);
