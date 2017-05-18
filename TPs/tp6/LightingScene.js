@@ -2,7 +2,7 @@ var degToRad = Math.PI / 180.0;
 
 var OCEAN_DIVISIONS = 150;
 
-var NUM_TARGETS = 1;
+var NUM_TARGETS = 2;
 
 function LightingScene() {
 	CGFscene.call(this);
@@ -37,8 +37,6 @@ LightingScene.prototype.init = function(application) {
 		'HidingPlainSite' : 2
 	};
 
-	console.log(this.currSubmarineAppearance);
-
 	this.initCameras();
 
 	this.initLights();
@@ -57,11 +55,19 @@ LightingScene.prototype.init = function(application) {
 	this.pole = new MyCylinder (this, 20, 10);
 	this.clock = new MyClock (this);
 	this.submarine = new MySubmarine (this, 8, 2, 8, 180, 0);
-	this.torpedo = new MyTorpedo (this, 4, 4, 4, 0, 0);
+	
+	this.targetsPos = [[]];
+	for (var i=0; i<NUM_TARGETS; i++){
+		this.targetsPos[i] = [];
+		var x =  0; // "Z" Wall
+		var y = Math.floor(Math.random()*6)+1;
+		var z = Math.floor(Math.random()*8)+1;
+		this.targetsPos[i].push (x, y , z);
+	}
 
 	this.targets = [];
 	for (var i=0; i<NUM_TARGETS; i++){
-		this.targets.push (new MyTarget (this, 2, 3, 2)); //change values to random in interval
+		this.targets.push (new MyTarget (this, this.targetsPos[i][0], this.targetsPos[i][1], this.targetsPos[i][2]));
 	}
 
 	// Materials
@@ -233,17 +239,11 @@ LightingScene.prototype.display = function() {
 	//Targets
 	for (var i=0; i<NUM_TARGETS; i++){
 		this.pushMatrix();
-			this.targets[i].display ();
+			this.targets[i].translateToPos();
+			this.rotate (90*degToRad, 0, 1, 0);
+			this.targets[i].display();
 		this.popMatrix();
 	};
-	
-	//Torpedo *for moddeling*
-	this.pushMatrix();
-		this.torpedo.translateToPos();
-		this.torpedo.updateRotation ();
-		this.torpedo.display ();
-	this.popMatrix();
-	
 
 	this.setUpdatePeriod (100);
 };

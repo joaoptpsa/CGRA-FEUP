@@ -113,6 +113,11 @@ MyInterface.prototype.processKeyboard = function(event) {
 		case (76): //upper case 'L'
 			this.scene.submarine.periscope.updatePeriscopeHeight (this.scene.submarine.periscopeMaxMinHeight, -this.scene.submarine.periscopeYDelta);
 			break;
+		case (102): //lower case 'f'
+		case (70): //upper case 'F'
+			//this.torpedo.place()
+			//this.torpedo.launch()
+			break;
 		default:
 			break; 
 	};

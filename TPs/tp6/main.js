@@ -26,6 +26,7 @@ serialInclude([
 	'MyParallelipiped.js',
 	'MyTwoFacedCylinder.js',
 	'MyTarget.js',
+	'MyCircleTarget.js',
 	'MyFish.js',
 	'MyTorpedo.js',
 

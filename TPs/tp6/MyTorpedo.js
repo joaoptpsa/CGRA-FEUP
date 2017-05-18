@@ -22,6 +22,8 @@ var degToRad = Math.PI / 180.0;
 	this.rudderMaxAngle = Math.PI/6;
 	this.rudderAngleDelta = this.rudderMaxAngle/20;
 
+	this.target = null;
+
 	this.cylinder = new MyCylinder (this.scene, 20, 8);
 	this.halfSphere = new MyHalfSphere (this.scene, 20, 8);
 	this.circle = new MyCircle (this.scene, 20, 1);
@@ -148,13 +150,13 @@ MyTorpedo.prototype.updateRotation = function(){
 	
 };
 
-MyTorpedo.prototype.rotateSubHor = function(factor){
+MyTorpedo.prototype.rotateTargetHor = function(factor){
 	var rotationDelta;
 	rotationDelta = (this.scene.speed/10) * factor;
 	this.rotationAngle += rotationDelta;
 };
 
-MyTorpedo.prototype.rotateSubVer =  function(factor){
+MyTorpedo.prototype.rotateTargetVer =  function(factor){
 	var rotationDelta;
 	rotationDelta = (this.scene.speed/10) * factor;
 

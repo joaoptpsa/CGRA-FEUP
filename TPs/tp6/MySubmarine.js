@@ -33,6 +33,8 @@ var degToRad = Math.PI / 180.0;
 	this.helix = new MySubmarineHelix (this.scene);
 	this.periscope = new MySubmarinePeriscope (this.scene);
 
+	this.torpedo = null;
+
 	this.bodyAppearance1 = new CGFappearance(this.scene);
 	this.bodyAppearance1.setAmbient(0.33, 0.33, 0.33, 1);
 	this.bodyAppearance1.setSpecular(0.9,0.9,0.9,1);	
@@ -232,6 +234,10 @@ var degToRad = Math.PI / 180.0;
 		this.scene.translate (0, 0.5+0.57, 2.2);
 		this.periscope.display ();
 	this.scene.popMatrix();
+
+	if (this.torpedo != null){
+		
+	}
 
  };
 
