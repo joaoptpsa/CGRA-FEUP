@@ -59,8 +59,9 @@ LightingScene.prototype.init = function(application) {
 	this.targetsPos = [[]];
 	for (var i=0; i<NUM_TARGETS; i++){
 		this.targetsPos[i] = [];
-		var x =  0; // "Z" Wall
-		var y = Math.floor(Math.random()*6)+1;
+		//Generate random positions on the bottom of the ocean
+		var x = Math.floor(Math.random()*8)+1;
+		var y = 0.05; //so it stays abit above the ocean floor
 		var z = Math.floor(Math.random()*8)+1;
 		this.targetsPos[i].push (x, y , z);
 	}
@@ -249,7 +250,7 @@ LightingScene.prototype.display = function() {
 	for (var i=0; i<NUM_TARGETS; i++){
 		this.pushMatrix();
 			this.targets[i].translateToPos();
-			this.rotate (90*degToRad, 0, 1, 0);
+			this.rotate (90*degToRad, 1, 0, 0);
 			this.targets[i].display();
 		this.popMatrix();
 	};

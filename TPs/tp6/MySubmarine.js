@@ -260,6 +260,9 @@ MySubmarine.prototype.update = function(currTime){
 	this.helix.updateHelixAngle(deltaTime); //in practice our "helixes" are just one
 	this.updateVerticalRudderAngle (this.rudderMaxAngle, (this.rudderMaxAngle*0.5)*(deltaTime/1000), 1); //Takes two seconds to reset
 	this.updateHorizontalRudderAngle (this.rudderMaxAngle, (this.rudderMaxAngle*0.5)*(deltaTime/1000), 1); //Takes two seconds to reset
+	if ((this.torpedo != null) && (this.torpedo.target != null)){
+		this.torpedo.bezierCurve (deltaTime);
+	}
 };
 
 MySubmarine.prototype.updatePos = function(deltaTime){
@@ -359,12 +362,9 @@ MySubmarine.prototype.updateHorizontalRudderAngle = function(maxAngle, rudderRot
 
 MySubmarine.prototype.createTorpedo = function(){
 	//kinda like singleton
-	if (this.torpedo === null){
+	//if there isn't already a torpedo and there are targets
+	if ((this.torpedo === null) && (this.scene.targets[0] != null)){
 		this.torpedo = new MyTorpedo (this.scene, this.x, this.y-0.5-0.1, this.z-(4.08/2)+0.025, this.rotationAngle*radToDeg, this.verticalAngle*radToDeg);
-
-		//if there are targets we should assign the first one to the torpedo
-		if (this.scene.targets[0] != null){
-			this.torpedo.target = this.scene.targets[0];
-		}
+		this.torpedo.getTarget ();
 	}
 };

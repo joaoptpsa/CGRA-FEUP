@@ -1,4 +1,8 @@
 var degToRad = Math.PI / 180.0;
+var X = 0;
+var Y = 1;
+var Z = 2;
+
 /**
  * MyTorpedo
  * @constructor
@@ -9,9 +13,9 @@ var degToRad = Math.PI / 180.0;
 	var d = new Date();
 	this.oldCurrTime = d.getTime();
 	
-	this.x = x || 0;
- 	this.y = y || 0;
- 	this.z = z || 0;
+	//Store the object's position 
+	this.pos = [];
+	this.pos.push (x||0, y||0, z||0)
 
 	this.rotationAngle = rotationAngle*degToRad || 0;
 	this.verticalAngle = verticalAngle*degToRad || 0;
@@ -23,6 +27,25 @@ var degToRad = Math.PI / 180.0;
 	this.rudderAngleDelta = this.rudderMaxAngle/20;
 
 	this.target = null;
+	
+	//P1 is the starting position for the torpedo
+	this.p1 = [];
+	this.p1.push (this.pos[X], this.pos[Y], this.pos[Z]);
+	
+	//P2 is the point 6 units ahead from the starting position for the torpedo
+	this.directionArray = [];
+	this.directionArray.push (Math.cos(verticalAngle)*Math.sin(rotationAngle), Math.cos(verticalAngle)*Math.cos(rotationAngle), Math.sin(verticalAngle));
+	this.p2 = [];
+	this.p2.push (this.pos[X]+6*this.directionArray[X], this.pos[Y]+6*this.directionArray[Y], this.pos[Z]+6*this.directionArray[Z]);
+
+	//P3 is the point 3 units above from the target
+	this.p3 = [];
+	//P4 is the target position
+	this.p4 = [];
+	
+	//distance between the starting torpedo position and the target
+	this.distance;
+	this.t = null //initialize at 0 when it gets a target
 
 	this.cylinder = new MyCylinder (this.scene, 20, 8);
 	this.halfSphere = new MyHalfSphere (this.scene, 20, 8);
@@ -96,7 +119,6 @@ var degToRad = Math.PI / 180.0;
 
 	//Vertical Back Trapezoid
 	this.scene.pushMatrix();
-		this.rotateVerticalRudder ();
 		this.scene.translate (0, 0, -0.025);
 		this.scene.rotate (90*degToRad, 0, 0, 1);
 		this.scene.rotate (90*degToRad, 1, 0, 0);
@@ -106,7 +128,6 @@ var degToRad = Math.PI / 180.0;
 
 	//Horizontal Back Trapezoid
 	this.scene.pushMatrix();
-		this.rotateHorizontalRudder();
 		this.scene.translate (0, 0, -0.025);
 		this.scene.rotate (90*degToRad, 1, 0, 0);
 		this.scene.scale (1, 0.05 , 0.2);
@@ -121,7 +142,7 @@ MyTorpedo.prototype.changeSpeed = function (speedDelta){
 };
 
 MyTorpedo.prototype.translateToPos = function(){
-	this.scene.translate (this.x, this.y, this.z);
+	this.scene.translate (this.pos[X], this.pos[Y], this.pos[Z]);
 };
 
 MyTorpedo.prototype.update = function(currTime){
@@ -137,9 +158,9 @@ MyTorpedo.prototype.update = function(currTime){
 };
 
 MyTorpedo.prototype.updatePos = function(deltaTime){
-	this.x += ((this.scene.speed/10)*Math.sin (this.rotationAngle))* (deltaTime/1000);
-	this.y += ((this.scene.speed/10)*Math.sin (-this.verticalAngle))* (deltaTime/1000); //-this.verticalAngle because we start it off as 0 and due to the way the trigonometic circle works we want (180-this.verticalAngle)
-	this.z += ((this.scene.speed/10)*Math.cos (this.rotationAngle))* (deltaTime/1000);
+	this.pos[X] += ((this.scene.speed/10)*Math.sin (this.rotationAngle))* (deltaTime/1000);
+	this.pos[Y] += ((this.scene.speed/10)*Math.sin (-this.verticalAngle))* (deltaTime/1000); //-this.verticalAngle because we start it off as 0 and due to the way the trigonometic circle works we want (180-this.verticalAngle)
+	this.pos[Z] += ((this.scene.speed/10)*Math.cos (this.rotationAngle))* (deltaTime/1000);
 };
 
 
@@ -165,67 +186,29 @@ MyTorpedo.prototype.rotateTargetVer =  function(factor){
 	}
 }
 
-MyTorpedo.prototype.rotateVerticalRudder = function(){
-	this.scene.rotate (this.verticalRudderAngle, 0, 1, 0);
-};
+MyTorpedo.prototype.getTarget = function(){
+	//if there are targets we should assign the first one to the torpedo
+	if (this.scene.targets[0] != null){
+		this.target = this.scene.targets[0];
+		//maybe remove the target from the array as well??
+		
+		this.p3.push (this.target.pos[X], this.target.pos[Y]+3, this.target.pos[Z]);
+		this.p4.push (this.target.pos[X], this.target.pos[Y], this.target.pos[Z]);
 
-
-MyTorpedo.prototype.updateVerticalRudderAngle = function(maxAngle, rudderRotation, reset){
-
-	if (reset && this.verticalRudderAngle!=0){
-		if (this.verticalRudderAngle>0){
-			if ((this.verticalRudderAngle-Math.abs(rudderRotation))>0){
-				this.verticalRudderAngle -= Math.abs(rudderRotation);
-			}
-			else{
-				this.verticalRudderAngle =0;
-			}
-		}
-		else if (this.verticalRudderAngle<0){
-			if ((this.verticalRudderAngle+Math.abs(rudderRotation))<0) {
-				this.verticalRudderAngle += Math.abs(rudderRotation);
-			}
-			else{
-				this.verticalRudderAngle =0;
-			}
-		}
-	}
-	else if (!reset)
-	{
-		if (!(Math.abs(this.verticalRudderAngle+rudderRotation)>=maxAngle)){
-			this.verticalRudderAngle += rudderRotation;
-		}
+		this.distance = Math.sqrt(Math.pow(this.target.pos[X]-this.p1[X],2)+Math.pow(this.target.pos[Y]-this.p1[Y],2)+Math.pow(this.target.pos[Z]-this.p1[Z],2));
+		this.t = 0;
 	}
 };
 
-MyTorpedo.prototype.rotateHorizontalRudder = function(){
-	this.scene.rotate (this.horizontalRudderAngle, 1, 0, 0);
-};
-
-MyTorpedo.prototype.updateHorizontalRudderAngle = function(maxAngle, rudderRotation, reset){
-
-	if (reset && this.horizontalRudderAngle!=0){
-		if (this.horizontalRudderAngle>0){
-			if ((this.horizontalRudderAngle-Math.abs(rudderRotation))>0){
-				this.horizontalRudderAngle -= Math.abs(rudderRotation);
-			}
-			else{
-				this.horizontalRudderAngle =0;
-			}
-		}
-		else if (this.horizontalRudderAngle<0){
-			if ((this.horizontalRudderAngle+Math.abs(rudderRotation))<0) {
-				this.horizontalRudderAngle += Math.abs(rudderRotation);
-			}
-			else{
-				this.horizontalRudderAngle =0;
-			}
-		}
+MyTorpedo.prototype.bezierCurve = function(deltaTime){
+	if ((this.t + (deltaTime/1000)/this.distance) <= 1){
+		this.t += (deltaTime/1000)/this.distance; //distance == time
 	}
-	else if (!reset)
-	{
-		if (!(Math.abs(this.horizontalRudderAngle+rudderRotation)>=maxAngle)){
-			this.horizontalRudderAngle += rudderRotation;
-		}
+
+	for (var i=0; i<3; i++){
+		this.pos[i] = Math.pow(1-this.t,3)*this.p1[i]
+	+3*this.t*Math.pow(1-this.t,2)*this.p2[i]
+	+3*Math.pow(this.t,2)*(1-this.t)*this.p3[i]
+	+Math.pow(this.t,3)*this.p4[i];
 	}
 };

@@ -1,4 +1,8 @@
 var degToRad = Math.PI / 180.0;
+var X = 0;
+var Y = 1;
+var Z = 2;
+
 /**
  * MyTarget
  * @constructor
@@ -7,9 +11,8 @@ var degToRad = Math.PI / 180.0;
 	CGFobject.call(this,scene);
 
 	//Store the object's position 
-	this.x = x || 0;
-	this.y = y || 0;
-	this.z = z || 0;
+	this.pos = [];
+	this.pos.push (x||0, y||0, z||0)
 
 	this.type = type || Math.floor(Math.random()*2)+1;
 
@@ -38,5 +41,5 @@ var degToRad = Math.PI / 180.0;
  };
 
  MyTarget.prototype.translateToPos = function (){
- 	this.scene.translate (this.x, this.y, this.z);
- }
+ 	this.scene.translate (this.pos[X], this.pos[Y], this.pos[Z]);
+ };
