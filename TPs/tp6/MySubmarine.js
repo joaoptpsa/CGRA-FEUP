@@ -24,6 +24,7 @@ var degToRad = Math.PI / 180.0;
 
 	this.periscopeMaxMinHeight = -0.8 //minimum height periscope will go down to, the periscope has a height of 0.95
 	this.periscopeYDelta = Math.abs(this.periscopeMaxMinHeight)/20;
+	this.periscopeAngleDelta = Math.PI/7;
 
 	this.cylinder = new MyCylinder (this.scene, 20, 8);
 	this.halfSphere = new MyHalfSphere (this.scene, 20, 8);
@@ -232,6 +233,7 @@ var degToRad = Math.PI / 180.0;
 	this.scene.pushMatrix();
 		this.periscope.translateToPos();
 		this.scene.translate (0, 0.5+0.57, 2.2);
+		this.periscope.rotateToPos();
 		this.periscope.display ();
 	this.scene.popMatrix();
 

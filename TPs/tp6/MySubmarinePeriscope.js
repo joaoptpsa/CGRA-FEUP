@@ -8,6 +8,8 @@ var degToRad = Math.PI / 180.0;
 
 	this.periscopeY = 0;
 
+	this.periscopeTheta = 0;
+
 	this.cylinder = new MyCylinder (this.scene, 20, 8);
 	this.circle = new MyCircle (this.scene, 20, 1);
  };
@@ -45,6 +47,14 @@ var degToRad = Math.PI / 180.0;
 
 MySubmarinePeriscope.prototype.translateToPos = function(){
 	this.scene.translate (0, this.periscopeY, 0);
+};
+
+MySubmarinePeriscope.prototype.rotateToPos = function(){
+	this.scene.rotate (this.periscopeTheta,0,1,0);
+};
+
+MySubmarinePeriscope.prototype.updatePeriscopeRotation = function(rotationFactor){
+		this.periscopeTheta += rotationFactor;
 };
 
 MySubmarinePeriscope.prototype.updatePeriscopeHeight = function(maxMinHeight, yDelta){

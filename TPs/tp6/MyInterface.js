@@ -118,6 +118,14 @@ MyInterface.prototype.processKeyboard = function(event) {
 			//this.torpedo.place()
 			//this.torpedo.launch()
 			break;
+		case (122): //lower case 'z'
+		case (90): //upper case 'Z'
+			this.scene.submarine.periscope.updatePeriscopeRotation(this.scene.submarine.periscopeAngleDelta);
+			break;
+		case (99): //lower case 'c'
+		case (67): //upper case 'C'
+			this.scene.submarine.periscope.updatePeriscopeRotation(-this.scene.submarine.periscopeAngleDelta);
+			break;
 		default:
 			break; 
 	};
