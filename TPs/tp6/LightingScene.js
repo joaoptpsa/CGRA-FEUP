@@ -235,6 +235,15 @@ LightingScene.prototype.display = function() {
 		this.submarine.updateRotation ();
 		this.submarine.display ();
 	this.popMatrix();
+	
+	//Submarine torpedo
+	if (this.submarine.torpedo !=null){
+		this.pushMatrix();
+			this.submarine.torpedo.translateToPos();
+			this.submarine.torpedo.updateRotation ();
+			this.submarine.torpedo.display ();
+		this.popMatrix();
+	}
 
 	//Targets
 	for (var i=0; i<NUM_TARGETS; i++){

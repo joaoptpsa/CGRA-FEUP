@@ -1,4 +1,5 @@
 var degToRad = Math.PI / 180.0;
+var radToDeg = 180.0 / Math.PI;
 /**
  * MySubmarine
  * @constructor
@@ -237,10 +238,6 @@ var degToRad = Math.PI / 180.0;
 		this.periscope.display ();
 	this.scene.popMatrix();
 
-	if (this.torpedo != null){
-		
-	}
-
  };
 
 MySubmarine.prototype.changeSpeed = function (speedDelta){
@@ -356,5 +353,12 @@ MySubmarine.prototype.updateHorizontalRudderAngle = function(maxAngle, rudderRot
 		if (!(Math.abs(this.horizontalRudderAngle+rudderRotation)>=maxAngle)){
 			this.horizontalRudderAngle += rudderRotation;
 		}
+	}
+};
+
+
+MySubmarine.prototype.createTorpedo = function(){
+	if (this.torpedo === null){
+		this.torpedo = new MyTorpedo (this.scene, this.x, this.y-0.5-0.1, this.z-2, this.rotationAngle*radToDeg, this.verticalAngle*radToDeg);
 	}
 };
