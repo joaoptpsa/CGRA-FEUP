@@ -16,14 +16,14 @@ function MyFish(scene) {
 	this.materialBody.setSpecular(0.1,0.1,0.1,1);
 	this.materialBody.setDiffuse(0.8,0.8,0.8,1);
 	this.materialBody.setShininess(10);
-	//this.materialBody.loadTexture("resources/images/table.png");
+	this.materialBody.loadTexture("resources/images/table.png");
 
 	this.materialTail = new CGFappearance(this.scene);
 	this.materialTail.setAmbient(0.6, 0.32, 0.004,1);
 	this.materialTail.setSpecular(0.1,0.1,0.1,1);
 	this.materialTail.setDiffuse(0.8,0.8,0.8,1);
 	this.materialTail.setShininess(10);
-	//this.materialTail.loadTexture("resources/images/table.png");
+	this.materialTail.loadTexture("resources/images/table.png");
 	
 };
 
@@ -35,7 +35,7 @@ MyFish.prototype.display = function () {
 	this.scene.pushMatrix();
 		this.scene.rotate (90*degToRad, 0, 0, 1); //so it stands horizontal
 		this.scene.scale(0.4,1,1);
-		//this.materialBody.apply();
+		this.materialBody.apply();
 		this.circle.display();
 	this.scene.popMatrix();
 
@@ -43,7 +43,7 @@ MyFish.prototype.display = function () {
 		this.scene.rotate (90*degToRad, 0, 0, 1); //so it stands horizontal
 		this.scene.scale(0.4,1,1);
 		this.scene.rotate (180*degToRad, 1, 0, 0);
-		//this.materialBody.apply();
+		this.materialBody.apply();
 		this.circle.display();
 	this.scene.popMatrix();
 	
@@ -51,7 +51,7 @@ MyFish.prototype.display = function () {
 	this.scene.pushMatrix();
 		this.scene.rotate (90*degToRad, 0, 0, 1); //so it stands horizontal
 		this.scene.translate(0,-0.55,0); //0.55 instead of 0.6 so the tail blends a bit with the body
-		//this.materialTail.apply();
+		this.materialTail.apply();
 		this.triangle.display();
 	this.scene.popMatrix();
 
@@ -59,7 +59,7 @@ MyFish.prototype.display = function () {
 		this.scene.rotate (90*degToRad, 0, 0, 1); //so it stands horizontal
 		this.scene.translate(0,-0.55,0);
 		this.scene.rotate (180*degToRad, 0, 1, 0);
-		//this.materialTail.apply();
+		this.materialTail.apply();
 		this.triangle.display();
 	this.scene.popMatrix();
 };

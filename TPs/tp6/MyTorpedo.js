@@ -32,21 +32,21 @@ var degToRad = Math.PI / 180.0;
 	this.torpedoAppearance1.setSpecular(0.9,0.9,0.9,1);	
 	this.torpedoAppearance1.setDiffuse(0.3,0.3,0.3,1);	
 	this.torpedoAppearance1.setShininess(30);
-	//this.torpedoAppearance1.loadTexture(this.scene.submarineAppearances[0][0]);
+	this.torpedoAppearance1.loadTexture(this.scene.submarineAppearances[0][3]);
 
 	this.torpedoAppearance2 = new CGFappearance(this.scene);
 	this.torpedoAppearance2.setAmbient(0.33, 0.33, 0.33, 1);
 	this.torpedoAppearance2.setSpecular(0.2,0.2,0.2,1);	
 	this.torpedoAppearance2.setDiffuse(0.2,0.2,0.2,1);	
 	this.torpedoAppearance2.setShininess(10);
-	//this.torpedoAppearance2.loadTexture(this.scene.submarineAppearances[1][0]);
+	this.torpedoAppearance2.loadTexture(this.scene.submarineAppearances[1][3]);
 
 	this.torpedoAppearance3 = new CGFappearance(this.scene);
 	this.torpedoAppearance3.setAmbient(0.33, 0.33, 0.33, 1);
 	this.torpedoAppearance3.setSpecular(0.2,0.2,0.2,1);	
 	this.torpedoAppearance3.setDiffuse(0.2,0.2,0.2,1);	
 	this.torpedoAppearance3.setShininess(10);
-	//this.torpedoAppearance3.loadTexture(this.scene.submarineAppearances[2][0]);
+	this.torpedoAppearance3.loadTexture(this.scene.submarineAppearances[2][3]);
  };
 
  MyTorpedo.prototype = Object.create(CGFobject.prototype);

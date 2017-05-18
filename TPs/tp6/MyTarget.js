@@ -6,6 +6,7 @@ var degToRad = Math.PI / 180.0;
  function MyTarget(scene, x, y, z) {
 	CGFobject.call(this,scene);
 
+	//Store the object's position 
 	this.x = x || 0;
 	this.y = y || 0;
 	this.z = z || 0;

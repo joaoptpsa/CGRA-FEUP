@@ -23,11 +23,11 @@ LightingScene.prototype.init = function(application) {
 	
 	this.submarineAppearances = [[]];
 	this.submarineAppearances[0] = [];
-	this.submarineAppearances[0].push ("resources/images/metal.jpg", "resources/images/metal.jpg", "resources/images/metal.jpg");
+	this.submarineAppearances[0].push ("resources/images/metal.jpg", "resources/images/metal.jpg", "resources/images/metal.jpg", "resources/images/metal.jpg"); //body, tower, periscope, torpedo
 	this.submarineAppearances[1] = [];
-	this.submarineAppearances[1].push ("resources/images/blueCammo.jpg", "resources/images/blueCammo.jpg", "resources/images/blueCammo.jpg");
+	this.submarineAppearances[1].push ("resources/images/blueCammo.jpg", "resources/images/blueCammo.jpg", "resources/images/blueCammo.jpg", "resources/images/blueCammo.jpg");
 	this.submarineAppearances[2] = [];
-	this.submarineAppearances[2].push ("resources/images/purpleCammo.png", "resources/images/diamondPlate.jpg", "resources/images/blueCammo.jpg");
+	this.submarineAppearances[2].push ("resources/images/purpleCammo.png", "resources/images/diamondPlate.jpg", "resources/images/blueCammo.jpg", "resources/images/purpleCammo.png");
 
 	this.currSubmarineAppearance = 0;
 
