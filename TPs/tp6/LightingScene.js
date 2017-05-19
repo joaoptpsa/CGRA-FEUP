@@ -2,7 +2,7 @@ var degToRad = Math.PI / 180.0;
 
 var OCEAN_DIVISIONS = 150;
 
-var NUM_TARGETS = 2;
+var NUM_TARGETS = 4;
 
 function LightingScene() {
 	CGFscene.call(this);
@@ -23,11 +23,11 @@ LightingScene.prototype.init = function(application) {
 	
 	this.submarineAppearances = [[]];
 	this.submarineAppearances[0] = [];
-	this.submarineAppearances[0].push ("resources/images/metal.jpg", "resources/images/metal.jpg", "resources/images/metal.jpg", "resources/images/torpedo.png"); //body, tower, periscope, torpedo
+	this.submarineAppearances[0].push ("resources/images/metal.jpg", "resources/images/metal.jpg", "resources/images/metal.jpg"); //body, tower, periscope
 	this.submarineAppearances[1] = [];
-	this.submarineAppearances[1].push ("resources/images/blueCammo.jpg", "resources/images/blueCammo.jpg", "resources/images/blueCammo.jpg", "resources/images/blueCammo.jpg");
+	this.submarineAppearances[1].push ("resources/images/blueCammo.jpg", "resources/images/blueCammo.jpg", "resources/images/blueCammo.jpg");
 	this.submarineAppearances[2] = [];
-	this.submarineAppearances[2].push ("resources/images/purpleCammo.png", "resources/images/diamondPlate.jpg", "resources/images/blueCammo.jpg", "resources/images/purpleCammo.png");
+	this.submarineAppearances[2].push ("resources/images/purpleCammo.png", "resources/images/diamondPlate.jpg", "resources/images/blueCammo.jpg");
 
 	this.currSubmarineAppearance = 0;
 
@@ -54,7 +54,7 @@ LightingScene.prototype.init = function(application) {
 	this.oceanPlane = new Plane (this, OCEAN_DIVISIONS);
 	this.pole = new MyCylinder (this, 20, 10);
 	this.clock = new MyClock (this);
-	this.submarine = new MySubmarine (this, 8, 2, 8, 180, 0);
+	this.submarine = new MySubmarine (this, 8, 5, 8, 180, 0);
 	
 	this.targetsPos = [[]];
 	for (var i=0; i<NUM_TARGETS; i++){

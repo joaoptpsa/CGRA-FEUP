@@ -55,26 +55,26 @@ var Z = 2;
 	this.circle = new MyCircle (this.scene, 20, 1);
 	this.rudderTrapezoidalPrism = new MyTrapezoidalPrism (this.scene, 0.25, 0.35);
 	
-	this.torpedoAppearance1 = new CGFappearance(this.scene);
-	this.torpedoAppearance1.setAmbient(0.33, 0.33, 0.33, 1);
-	this.torpedoAppearance1.setSpecular(0.9,0.9,0.9,1);	
-	this.torpedoAppearance1.setDiffuse(0.3,0.3,0.3,1);	
-	this.torpedoAppearance1.setShininess(30);
-	this.torpedoAppearance1.loadTexture(this.scene.submarineAppearances[0][3]);
+	this.bodyAppearance = new CGFappearance(this.scene);
+	this.bodyAppearance.setAmbient(0.33, 0.33, 0.33, 1);
+	this.bodyAppearance.setSpecular(0.9,0.9,0.9,1);	
+	this.bodyAppearance.setDiffuse(0.3,0.3,0.3,1);	
+	this.bodyAppearance.setShininess(30);
+	this.bodyAppearance.loadTexture(/*path*/);
 
-	this.torpedoAppearance2 = new CGFappearance(this.scene);
-	this.torpedoAppearance2.setAmbient(0.33, 0.33, 0.33, 1);
-	this.torpedoAppearance2.setSpecular(0.2,0.2,0.2,1);	
-	this.torpedoAppearance2.setDiffuse(0.2,0.2,0.2,1);	
-	this.torpedoAppearance2.setShininess(10);
-	this.torpedoAppearance2.loadTexture(this.scene.submarineAppearances[1][3]);
+	this.frontAppearance = new CGFappearance(this.scene);
+	this.frontAppearance.setAmbient(0.33, 0.33, 0.33, 1);
+	this.frontAppearance.setSpecular(0.2,0.2,0.2,1);	
+	this.frontAppearance.setDiffuse(0.2,0.2,0.2,1);	
+	this.frontAppearance.setShininess(10);
+	this.frontAppearance.loadTexture(/*path*/);
 
-	this.torpedoAppearance3 = new CGFappearance(this.scene);
-	this.torpedoAppearance3.setAmbient(0.33, 0.33, 0.33, 1);
-	this.torpedoAppearance3.setSpecular(0.2,0.2,0.2,1);	
-	this.torpedoAppearance3.setDiffuse(0.2,0.2,0.2,1);	
-	this.torpedoAppearance3.setShininess(10);
-	this.torpedoAppearance3.loadTexture(this.scene.submarineAppearances[2][3]);
+	this.backAppearance = new CGFappearance(this.scene);
+	this.backAppearance.setAmbient(0.33, 0.33, 0.33, 1);
+	this.backAppearance.setSpecular(0.2,0.2,0.2,1);	
+	this.backAppearance.setDiffuse(0.2,0.2,0.2,1);	
+	this.backAppearance.setShininess(10);
+	this.backAppearance.loadTexture(/*path*/);
  };
 
  MyTorpedo.prototype = Object.create(CGFobject.prototype);
@@ -82,26 +82,12 @@ var Z = 2;
 
  MyTorpedo.prototype.display = function() {
 
-	switch (parseInt(this.scene.currSubmarineAppearance)) {
-	  case 0:
-		this.torpedoAppearance1.apply();
-		break;
-	  case 1:
-		this.torpedoAppearance2.apply();
-		break;
-	  case 2:
-		this.torpedoAppearance3.apply();
-		break;
-	  default:
-		this.torpedoAppearance1.apply();
-		break;
-	}
-
 	//MyCylinder class generates a cylinder with 1 unit of radius -> 2 units of diameter
 	//Main Body
 	this.scene.pushMatrix();
 		this.scene.scale (0.1/2, 0.2/2, 0.7);
-		this.cylinder.display ();
+		this.bodyAppearance.apply();
+		this.cylinder.display();
 	this.scene.popMatrix();
 	
 	//MyCircle class generates a circle with 1 unit of radius -> 2 units of diameter
@@ -109,7 +95,8 @@ var Z = 2;
 	this.scene.pushMatrix();
 		this.scene.translate (0, 0, 0.7);
 		this.scene.scale (0.1/2, 0.2/2, 0.15);
-		this.halfSphere.display ();
+		this.backAppearance.apply()
+		this.halfSphere.display();
 	this.scene.popMatrix();
 	
 	//Front HalfSphere
@@ -117,7 +104,8 @@ var Z = 2;
 		this.scene.translate (0, 0, 0);
 		this.scene.scale (0.1/2, 0.2/2, 0.15);
 		this.scene.rotate (180*degToRad, 0, 1, 0);
-		this.halfSphere.display ();
+		this.frontAppearance.apply();
+		this.halfSphere.display();
 	this.scene.popMatrix();
 
 	//Vertical Back Trapezoid
@@ -126,6 +114,7 @@ var Z = 2;
 		this.scene.rotate (90*degToRad, 0, 0, 1);
 		this.scene.rotate (90*degToRad, 1, 0, 0);
 		this.scene.scale (1, 0.05 , 0.2);
+		this.backAppearance.apply()
 		this.rudderTrapezoidalPrism.display ();
 	this.scene.popMatrix();
 
@@ -134,6 +123,7 @@ var Z = 2;
 		this.scene.translate (0, 0, -0.025);
 		this.scene.rotate (90*degToRad, 1, 0, 0);
 		this.scene.scale (1, 0.05 , 0.2);
+		this.backAppearance.apply()
 		this.rudderTrapezoidalPrism.display ();
 	this.scene.popMatrix();
  };
@@ -212,17 +202,18 @@ MyTorpedo.prototype.bezierCurve = function(deltaTime){
 			this.oldPos[i] = this.pos[i];
 
 			//calculate new position
-			this.pos[i] = Math.pow(1-this.t,3)*this.p1[i]
-		+3*this.t*Math.pow(1-this.t,2)*this.p2[i]
+			this.pos[i] = Math.pow((1-this.t),3)*this.p1[i]
+		+3*this.t*Math.pow((1-this.t),2)*this.p2[i]
 		+3*Math.pow(this.t,2)*(1-this.t)*this.p3[i]
 		+Math.pow(this.t,3)*this.p4[i];
-
+			/*
 			//update directionArray
 			this.directionArray[i] = this.pos[i]-this.oldPos[i];
 
 			var directionArrayMod = Math.sqrt(Math.pow(this.directionArray[X],2)+Math.pow(this.directionArray[Y],2)+Math.pow(this.directionArray[Z],2));
 			this.rotationAngle = Math.atan(this.directionArray[Y]/this.directionArray[X]);
 			this.verticalAngle = Math.acos(this.directionArray[Z]/directionArrayMod);
+			*/
 		}
 
 	}
