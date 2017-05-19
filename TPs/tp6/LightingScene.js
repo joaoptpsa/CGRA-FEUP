@@ -60,9 +60,9 @@ LightingScene.prototype.init = function(application) {
 	for (var i=0; i<NUM_TARGETS; i++){
 		this.targetsPos[i] = [];
 		//Generate random positions on the bottom of the ocean
-		var x = Math.floor(Math.random()*8)+1;
+		var x = Math.floor(Math.random()*16)+1;
 		var y = 0.05; //so it stays abit above the ocean floor
-		var z = Math.floor(Math.random()*8)+1;
+		var z = Math.floor(Math.random()*16)+1;
 		this.targetsPos[i].push (x, y , z);
 	}
 
