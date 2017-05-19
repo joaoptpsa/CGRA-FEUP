@@ -62,6 +62,20 @@ var Z = 2;
 	this.bodyAppearance3.setShininess(10);
 	this.bodyAppearance3.loadTexture(this.scene.submarineAppearances[2][0]);
 
+	this.bodyAppearance4 = new CGFappearance(this.scene);
+	this.bodyAppearance4.setAmbient(0.33, 0.33, 0.33, 1);
+	this.bodyAppearance4.setSpecular(0.2,0.2,0.2,1);	
+	this.bodyAppearance4.setDiffuse(0.2,0.2,0.2,1);	
+	this.bodyAppearance4.setShininess(10);
+	this.bodyAppearance4.loadTexture(this.scene.submarineAppearances[3][0]);
+
+	this.bodyAppearance5 = new CGFappearance(this.scene);
+	this.bodyAppearance5.setAmbient(0.33, 0.33, 0.33, 1);
+	this.bodyAppearance5.setSpecular(0.2,0.2,0.2,1);	
+	this.bodyAppearance5.setDiffuse(0.2,0.2,0.2,1);	
+	this.bodyAppearance5.setShininess(10);
+	this.bodyAppearance5.loadTexture(this.scene.submarineAppearances[4][0]);
+
 	this.towerAppearance1 = new CGFappearance(this.scene);
 	this.towerAppearance1.setAmbient(0.33, 0.33, 0.33, 1);
 	this.towerAppearance1.setSpecular(0.9,0.9,0.9,1);	
@@ -83,6 +97,20 @@ var Z = 2;
 	this.towerAppearance3.setShininess(30);
 	this.towerAppearance3.loadTexture(this.scene.submarineAppearances[2][1]);
 
+	this.towerAppearance4 = new CGFappearance(this.scene);
+	this.towerAppearance4.setAmbient(0.33, 0.33, 0.33, 1);
+	this.towerAppearance4.setSpecular(0.9,0.9,0.9,1);	
+	this.towerAppearance4.setDiffuse(0.3,0.3,0.3,1);	
+	this.towerAppearance4.setShininess(30);
+	this.towerAppearance4.loadTexture(this.scene.submarineAppearances[3][1]);
+
+	this.towerAppearance5 = new CGFappearance(this.scene);
+	this.towerAppearance5.setAmbient(0.33, 0.33, 0.33, 1);
+	this.towerAppearance5.setSpecular(0.9,0.9,0.9,1);	
+	this.towerAppearance5.setDiffuse(0.3,0.3,0.3,1);	
+	this.towerAppearance5.setShininess(30);
+	this.towerAppearance5.loadTexture(this.scene.submarineAppearances[4][1]);
+
 	this.periscopeAppearance1 = new CGFappearance(this.scene);
 	this.periscopeAppearance1.setAmbient(0.33, 0.33, 0.33, 1);
 	this.periscopeAppearance1.setSpecular(0.9,0.9,0.9,1);	
@@ -103,6 +131,20 @@ var Z = 2;
 	this.periscopeAppearance3.setDiffuse(0.3,0.3,0.3,1);	
 	this.periscopeAppearance3.setShininess(30);
 	this.periscopeAppearance3.loadTexture(this.scene.submarineAppearances[2][2]);
+
+	this.periscopeAppearance4 = new CGFappearance(this.scene);
+	this.periscopeAppearance4.setAmbient(0.33, 0.33, 0.33, 1);
+	this.periscopeAppearance4.setSpecular(0.9,0.9,0.9,1);	
+	this.periscopeAppearance4.setDiffuse(0.3,0.3,0.3,1);	
+	this.periscopeAppearance4.setShininess(30);
+	this.periscopeAppearance4.loadTexture(this.scene.submarineAppearances[3][2]);
+
+	this.periscopeAppearance5 = new CGFappearance(this.scene);
+	this.periscopeAppearance5.setAmbient(0.33, 0.33, 0.33, 1);
+	this.periscopeAppearance5.setSpecular(0.9,0.9,0.9,1);	
+	this.periscopeAppearance5.setDiffuse(0.3,0.3,0.3,1);	
+	this.periscopeAppearance5.setShininess(30);
+	this.periscopeAppearance5.loadTexture(this.scene.submarineAppearances[4][2]);
  };
 
  MySubmarine.prototype = Object.create(CGFobject.prototype);
@@ -120,6 +162,12 @@ var Z = 2;
 	  case 2:
 		this.bodyAppearance3.apply();
 		break;
+	  case 3:
+	  	this.bodyAppearance4.apply();
+	  	break;
+	  case 4:
+	  	this.bodyAppearance5.apply();
+	  	break;
 	  default:
 		this.bodyAppearance1.apply();
 		break;
@@ -190,6 +238,12 @@ var Z = 2;
 	  case 2:
 		this.towerAppearance3.apply();
 		break;
+	  case 3:
+		this.towerAppearance4.apply();
+		break;
+	  case 4:
+		this.towerAppearance5.apply();
+		break;
 	  default:
 		this.towerAppearance1.apply();
 		break;
@@ -228,6 +282,12 @@ var Z = 2;
 		break;
 	  case 2:
 		this.periscopeAppearance3.apply();
+		break;
+	  case 3:
+		this.periscopeAppearance4.apply();
+		break;
+	  case 4:
+		this.periscopeAppearance5.apply();
 		break;
 	  default:
 		this.periscopeAppearance1.apply();
