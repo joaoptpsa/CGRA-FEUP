@@ -116,7 +116,6 @@ MyInterface.prototype.processKeyboard = function(event) {
 		case (102): //lower case 'f'
 		case (70): //upper case 'F'
 			this.scene.submarine.createTorpedo ();
-			//this.torpedo.launch()
 			break;
 		case (122): //lower case 'z'
 		case (90): //upper case 'Z'
