@@ -61,21 +61,21 @@ var Z = 2;
 	this.bodyAppearance.setSpecular(0.9,0.9,0.9,1);	
 	this.bodyAppearance.setDiffuse(0.3,0.3,0.3,1);	
 	this.bodyAppearance.setShininess(30);
-	this.bodyAppearance.loadTexture(/*path*/);
+	this.bodyAppearance.loadTexture("resources/images/torpedo_body.jpg"); 
 
 	this.frontAppearance = new CGFappearance(this.scene);
 	this.frontAppearance.setAmbient(0.33, 0.33, 0.33, 1);
 	this.frontAppearance.setSpecular(0.2,0.2,0.2,1);	
 	this.frontAppearance.setDiffuse(0.2,0.2,0.2,1);	
 	this.frontAppearance.setShininess(10);
-	this.frontAppearance.loadTexture(/*path*/);
+	this.frontAppearance.loadTexture("resources/images/torpedo_body.jpg");
 
 	this.backAppearance = new CGFappearance(this.scene);
 	this.backAppearance.setAmbient(0.33, 0.33, 0.33, 1);
 	this.backAppearance.setSpecular(0.2,0.2,0.2,1);	
 	this.backAppearance.setDiffuse(0.2,0.2,0.2,1);	
 	this.backAppearance.setShininess(10);
-	this.backAppearance.loadTexture(/*path*/);
+	this.backAppearance.loadTexture("resources/images/torpedo_back.png");
  };
 
  MyTorpedo.prototype = Object.create(CGFobject.prototype);
@@ -115,7 +115,7 @@ var Z = 2;
 		this.scene.rotate (90*degToRad, 0, 0, 1);
 		this.scene.rotate (90*degToRad, 1, 0, 0);
 		this.scene.scale (1, 0.05 , 0.2);
-		this.backAppearance.apply()
+		this.frontAppearance.apply();
 		this.rudderTrapezoidalPrism.display ();
 	this.scene.popMatrix();
 
@@ -124,7 +124,7 @@ var Z = 2;
 		this.scene.translate (0, 0, -0.025);
 		this.scene.rotate (90*degToRad, 1, 0, 0);
 		this.scene.scale (1, 0.05 , 0.2);
-		this.backAppearance.apply()
+		this.frontAppearance.apply();
 		this.rudderTrapezoidalPrism.display ();
 	this.scene.popMatrix();
  };
