@@ -91,7 +91,7 @@ LightingScene.prototype.init = function(application) {
 	this.oceanAppearance.setDiffuse(0.7,0.7,0.7,1);
 	this.oceanAppearance.setSpecular(0.1,0.1,0.1,1);
 	this.oceanAppearance.setShininess(10);
-	this.oceanAppearance.setTextureWrap("REPEAT", "REPEAT");
+	//this.oceanAppearance.setTextureWrap("REPEAT", "REPEAT");
 	this.oceanAppearance.loadTexture("resources/images/ocean.jpg");
 
 	this.cylinderAppearance = new CGFappearance(this);
