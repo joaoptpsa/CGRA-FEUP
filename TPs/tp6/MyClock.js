@@ -13,7 +13,7 @@ function MyClock(scene) {
 	var d = new Date();
 	this.oldCurrTime = d.getTime();
 
-	this.cylinder = new MyCylinder (this.scene, 12, 1);
+	this.cylinder = new MyCylinder (this.scene, 12, 10);
 	this.topFace = new MyCircle (this.scene, 12, 1);
 	this.secondPointer = new MyClockHand (this.scene);
 	this.secondPointer.setAngle (90);
@@ -53,20 +53,22 @@ MyClock.prototype.display = function () {
 	
 	// Cylinder
 	this.scene.pushMatrix();
+		this.scene.scale(2, 2, 1);
+
 		this.materialClock.apply();
 		this.cylinder.display();
 	this.scene.popMatrix();
 
-	//Top Face
+	//Front Face
 	this.scene.pushMatrix();
-		this.scene.translate(0, 0, 1); //lets put it at the top of the cylinder
+		this.scene.translate(0, 0, 0.5); //lets put it at the top of the cylinder
 		this.materialTopOfClock.apply();
 		this.topFace.display();
 	this.scene.popMatrix();
 
 	//Seconds Pointer
 	this.scene.pushMatrix();
-		this.scene.translate(0, 0, 1.01);
+		this.scene.translate(0, 0, 0.5+0.01);
 		this.scene.rotate (-this.secondPointer.angle *degToRad, 0, 0 ,1);
 		this.pointerMaterial.apply();
 		this.secondPointer.display();
@@ -74,7 +76,7 @@ MyClock.prototype.display = function () {
 
 	//Minute Pointer
 	this.scene.pushMatrix();
-		this.scene.translate(0, 0, 1.015); 
+		this.scene.translate(0, 0, 0.5+0.015); 
 		this.scene.rotate (-this.minutePointer.angle *degToRad, 0, 0 ,1);
 		this.scene.scale (1, 0.8, 1);
 		this.pointerMaterial.apply();
@@ -84,11 +86,19 @@ MyClock.prototype.display = function () {
 	
 	//Hours Pointer
 	this.scene.pushMatrix();
-		this.scene.translate(0, 0, 1.02);
+		this.scene.translate(0, 0, 0.5+0.02);
 		this.scene.rotate (-this.hourPointer.angle *degToRad, 0, 0 ,1);
 		this.scene.scale (1, 0.6, 1);
 		this.pointerMaterial.apply();
 		this.hourPointer.display();
+	this.scene.popMatrix();
+
+	//Back Face
+	this.scene.pushMatrix();
+		this.scene.translate(0, 0, -0.5);
+		this.scene.rotate(180*degToRad, 0, 1, 0);
+		this.materialClock.apply();
+		this.topFace.display();
 	this.scene.popMatrix();
 };
 

@@ -6,7 +6,7 @@
  	CGFobject.call(this,scene);
 	
 	this.slices = slices;
-	this.radius = radius;
+	this.radius = radius || 0.5;
 
  	this.initBuffers();
  };

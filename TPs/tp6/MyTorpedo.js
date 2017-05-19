@@ -62,7 +62,6 @@ var Z = 2;
 
 	this.cylinder = new MyCylinder (this.scene, 20, 8);
 	this.halfSphere = new MyHalfSphere (this.scene, 20, 8);
-	this.circle = new MyCircle (this.scene, 20, 1);
 	this.rudderTrapezoidalPrism = new MyTrapezoidalPrism (this.scene, 0.25, 0.35);
 	
 	this.bodyAppearance = new CGFappearance(this.scene);
@@ -92,26 +91,26 @@ var Z = 2;
 
  MyTorpedo.prototype.display = function() {
 
-	//MyCylinder class generates a cylinder with 1 unit of radius -> 2 units of diameter
+
 	//Main Body
 	this.scene.pushMatrix();
-		this.scene.scale (0.1/2, 0.2/2, 0.7);
+		this.scene.scale (0.1, 0.2, 0.7);
 		this.bodyAppearance.apply();
 		this.cylinder.display();
 	this.scene.popMatrix();
 	
-	//MyCircle class generates a circle with 1 unit of radius -> 2 units of diameter
-	//Back HalfSphere
+	//MyHalfSphere class generates a circle with 1 unit of radius -> 2 units of diameter
+	//Front HalfSphere
 	this.scene.pushMatrix();
-		this.scene.translate (0, 0, 0.7);
+		this.scene.translate (0, 0, 0.7/2);
 		this.scene.scale (0.1/2, 0.2/2, 0.15);
 		this.backAppearance.apply()
 		this.halfSphere.display();
 	this.scene.popMatrix();
 	
-	//Front HalfSphere
+	//Back HalfSphere
 	this.scene.pushMatrix();
-		this.scene.translate (0, 0, 0);
+		this.scene.translate (0, 0, -0.7/2);
 		this.scene.scale (0.1/2, 0.2/2, 0.15);
 		this.scene.rotate (180*degToRad, 0, 1, 0);
 		this.frontAppearance.apply();
@@ -120,7 +119,7 @@ var Z = 2;
 
 	//Vertical Back Trapezoid
 	this.scene.pushMatrix();
-		this.scene.translate (0, 0, -0.025);
+		this.scene.translate (0, 0, (-0.7/2)-0.025);
 		this.scene.rotate (90*degToRad, 0, 0, 1);
 		this.scene.rotate (90*degToRad, 1, 0, 0);
 		this.scene.scale (1, 0.05 , 0.2);
@@ -130,7 +129,7 @@ var Z = 2;
 
 	//Horizontal Back Trapezoid
 	this.scene.pushMatrix();
-		this.scene.translate (0, 0, -0.025);
+		this.scene.translate (0, 0, (-0.7/2)-0.025);
 		this.scene.rotate (90*degToRad, 1, 0, 0);
 		this.scene.scale (1, 0.05 , 0.2);
 		this.frontAppearance.apply();

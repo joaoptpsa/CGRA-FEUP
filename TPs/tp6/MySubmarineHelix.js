@@ -28,8 +28,7 @@ var degToRad = Math.PI / 180.0;
 
 	//TwoFaced Cylinder
 	this.scene.pushMatrix();
-		this.scene.translate (0, 0, -0.25/2);
-		this.scene.scale (0.4/2, 0.4/2 , 0.25);
+		this.scene.scale (0.4, 0.4 , 0.25);
 		this.twoFaced.display ();
 	this.scene.popMatrix();
 

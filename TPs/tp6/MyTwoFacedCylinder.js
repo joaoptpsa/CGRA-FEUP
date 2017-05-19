@@ -2,11 +2,12 @@
  * MyTwoFacedCylinder
  * @constructor
  */
- function MyTwoFacedCylinder(scene, slices, stacks) {
+ function MyTwoFacedCylinder(scene, slices, stacks, radius){
  	CGFobject.call(this,scene);
 	
 	this.slices = slices;
 	this.stacks = stacks;
+	this.radius = radius || 0.5, //r=0.5; d=1
 	this.minS = 0;
 	this.maxS = 1;
 	this.minT = 0;
@@ -44,7 +45,7 @@
 	{
 		for (j=0;j<=this.slices;j++) // <= because we have to repeat the first vertice in order to get a seamless texture wrap
 		{
-			this.vertices.push(Math.cos(theta*j), Math.sin (theta*j), i*stacksStep);
+			this.vertices.push(this.radius*Math.cos(theta*j), this.radius*Math.sin (theta*j), (i*stacksStep)-0.5);
 			this.normals.push((Math.cos(theta*(j))), (Math.sin(theta*(j))), 0);
 			this.texCoords.push (s+ j*sInc, t+ i*tInc);
 		}
@@ -67,7 +68,7 @@
 	{
 		for (j=0;j<=this.slices;j++) // <= because we have to repeat the first vertice in order to get a seamless texture wrap
 		{
-			this.vertices.push(Math.cos(theta*j), Math.sin (theta*j), i*stacksStep);
+			this.vertices.push(this.radius*Math.cos(theta*j), this.radius*Math.sin (theta*j), (i*stacksStep)-0.5);
 			this.normals.push((-Math.cos(theta*(j))), (-Math.sin(theta*(j))), 0);
 			this.texCoords.push (s+ j*sInc, t+ i*tInc);
 		}

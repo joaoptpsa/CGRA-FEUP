@@ -21,16 +21,16 @@ var degToRad = Math.PI / 180.0;
 
 	//Vertical Periscope
 	this.scene.pushMatrix();
-		this.scene.translate (0, 0, 0);
-		this.scene.scale (0.05, 1 , 0.05);
+		this.scene.translate (0, 0.5, 0);
+		this.scene.scale (0.1, 1 , 0.1);
 		this.scene.rotate (270*degToRad, 1, 0 ,0);
 		this.cylinder.display ();
 	this.scene.popMatrix();
 
 	//Horizontal Periscope
 	this.scene.pushMatrix();
-		this.scene.translate (0, (1-0.05), (-0.05));
-		this.scene.scale (0.05, 0.05 , 0.2);
+		this.scene.translate (0, (1-0.05), (0.2/2)+(-0.05));
+		this.scene.scale (0.1, 0.1 , 0.2);
 		//this.scene.rotate (0*degToRad, 1, 0 ,0);
 		this.cylinder.display ();
 	this.scene.popMatrix();

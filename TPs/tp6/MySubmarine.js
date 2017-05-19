@@ -33,7 +33,7 @@ var Z = 2;
 
 	this.cylinder = new MyCylinder (this.scene, 20, 8);
 	this.halfSphere = new MyHalfSphere (this.scene, 20, 8);
-	this.circle = new MyCircle (this.scene, 20, 1);
+	this.circle = new MyCircle (this.scene, 20, 0.5); //r=0.5; d=1;
 	this.rudderTrapezoidalPrism = new MyTrapezoidalPrism (this.scene, 1.64, 2.34);
 	this.towerTrapezoidalPrism = new MyTrapezoidalPrism (this.scene, 1, 1.42);
 	this.helix = new MySubmarineHelix (this.scene);
@@ -197,24 +197,23 @@ var Z = 2;
 		break;
 	}
 
-	//MyCylinder class generates a cylinder with 1 unit of radius -> 2 units of diameter
 	//Main Body
 	this.scene.pushMatrix();
-		this.scene.scale (0.73/2, 1/2 , 4.08);
+		this.scene.scale (0.73, 1 , 4.08);
 		this.cylinder.display ();
 	this.scene.popMatrix();
 	
 	//MyCircle class generates a circle with 1 unit of radius -> 2 units of diameter
-	//Back HalfSphere
+	//Front HalfSphere
 	this.scene.pushMatrix();
-		this.scene.translate (0, 0, 4.08);
+		this.scene.translate (0, 0, 4.08/2);
 		this.scene.scale (0.73/2, 1/2 , 0.46);
 		this.halfSphere.display ();
 	this.scene.popMatrix();
 	
-	//Front HalfSphere
+	//Back HalfSphere
 	this.scene.pushMatrix();
-		this.scene.translate (0, 0, 0);
+		this.scene.translate (0, 0, -4.08/2);
 		this.scene.scale (0.73/2, 1/2 , 0.46);
 		this.scene.rotate (180*degToRad, 0, 1, 0);
 		this.halfSphere.display ();
@@ -222,8 +221,8 @@ var Z = 2;
 
 	//Vertical Back Trapezoid
 	this.scene.pushMatrix();
+		this.scene.translate (0, 0, (-4.08/2)-0.125);
 		this.rotateVerticalRudder ();
-		this.scene.translate (0, 0, -0.125);
 		this.scene.scale (1, 1 , 0.25);
 		this.scene.rotate (90*degToRad, 0, 0, 1);
 		this.scene.rotate (90*degToRad, 1, 0, 0);
@@ -232,8 +231,8 @@ var Z = 2;
 
 	//Horizontal Back Trapezoid
 	this.scene.pushMatrix();
-		this.rotateHorizontalRudder();44
-		this.scene.translate (0, 0, -0.125);
+		this.scene.translate (0, 0, (-4.08/2)-0.125);
+		this.rotateHorizontalRudder();
 		this.scene.scale (1, 1 , 0.25);
 		this.scene.rotate (90*degToRad, 1, 0, 0);
 		this.rudderTrapezoidalPrism.display ();
@@ -241,13 +240,13 @@ var Z = 2;
 
 	//Right Helix
 	this.scene.pushMatrix();
-		this.scene.translate (0.51, -0.3, 0);
+		this.scene.translate (0.51, -0.3, (-4.08/2));
 		this.helix.display ();
 	this.scene.popMatrix();
 
 	//Left Helix
 	this.scene.pushMatrix();
-		this.scene.translate (-0.51, -0.3, 0);
+		this.scene.translate (-0.51, -0.3, (-4.08/2));
 		this.helix.display ();
 	this.scene.popMatrix();
 
@@ -278,23 +277,23 @@ var Z = 2;
 
 	//Top cylinder
 	this.scene.pushMatrix();
-		this.scene.translate (0, 0, 2);
-		this.scene.scale (0.73/2, 0.5+0.57, 0.88/2);
+		this.scene.translate (0, (0.5+0.57)/2, 1);
+		this.scene.scale (0.5, 0.5+0.57, 0.88);
 		this.scene.rotate (270*degToRad, 1, 0 ,0);
 		this.cylinder.display ();
 	this.scene.popMatrix();
 
 	//Top cylinder "face"
 	this.scene.pushMatrix();
-		this.scene.translate (0, 0.5+0.57, 2);
-		this.scene.scale (0.73/2, 1 , 0.88/2);
+		this.scene.translate (0, 0.5+0.57, 1);
+		this.scene.scale (0.5, 1 , 0.88);
 		this.scene.rotate (270*degToRad, 1, 0 ,0);
 		this.circle.display ();
 	this.scene.popMatrix();
-
+	
 	//Horizontal Tower Trapezoid
 	this.scene.pushMatrix();
-		this.scene.translate (0, 0.7, 2);
+		this.scene.translate (0, 0.7, 1);
 		this.scene.scale (1, 1 , 0.25);
 		this.scene.rotate (90*degToRad, 1, 0, 0);
 		this.towerTrapezoidalPrism.display ();
@@ -327,7 +326,7 @@ var Z = 2;
 	//Periscope
 	this.scene.pushMatrix();
 		this.periscope.translateToPos();
-		this.scene.translate (0, 0.5+0.57, 2.2);
+		this.scene.translate (0, 0.5+0.57, 1.1);
 		this.periscope.rotateToPos();
 		this.periscope.display ();
 	this.scene.popMatrix();

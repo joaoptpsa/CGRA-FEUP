@@ -64,7 +64,7 @@ LightingScene.prototype.init = function(application) {
 
 	// Scene elements
 	this.oceanPlane = new Plane (this, OCEAN_DIVISIONS);
-	this.pole = new MyCylinder (this, 20, 10);
+	this.cylinder = new MyCylinder (this, 20, 1);
 	this.clock = new MyClock (this);
 	this.submarine = new MySubmarine (this, 8, 5, 8, 180, 0);
 	
@@ -217,24 +217,24 @@ LightingScene.prototype.display = function() {
 	
 	// Ocean Plane
 	this.pushMatrix();
+		this.translate (8, 0, 8)
+		this.scale (16, 1, 16);
 		this.rotate (-90 * degToRad, 1, 0, 0);
-		this.translate (8, -8, 0)
-		this.scale (16, 16, 0);
-
+		
 		this.oceanAppearance.apply();
 		this.oceanPlane.display ();
 	this.popMatrix();
-
+	
 	//Pole
 	this.pushMatrix();
+		this.translate (8, 3, 0);
+		this.scale (0.1, 6, 0.1);
 		this.rotate (-90 * degToRad, 1, 0, 0);
-		this.translate (8, 0.2, 0);
-		this.scale (0.2, 0.2, 6);
-		
-		this.cylinderAppearance.apply ();
-		this.pole.display ();
-	this.popMatrix();
 
+		this.cylinderAppearance.apply ();
+		this.cylinder.display ();
+	this.popMatrix();
+	
 	//Clock
 	this.pushMatrix();
 		this.translate (8, 5, 0);
@@ -248,7 +248,7 @@ LightingScene.prototype.display = function() {
 		this.submarine.updateRotation ();
 		this.submarine.display ();
 	this.popMatrix();
-	
+
 	//Submarine torpedo
 	if (this.submarine.torpedo !=null){
 		this.pushMatrix();
