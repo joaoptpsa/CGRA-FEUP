@@ -247,7 +247,7 @@ LightingScene.prototype.display = function() {
 	}
 
 	//Targets
-	for (var i=0; i<NUM_TARGETS; i++){
+	for (var i=0; i<this.targets.length; i++){
 		this.pushMatrix();
 			this.targets[i].translateToPos();
 			this.rotate (90*degToRad, 1, 0, 0);

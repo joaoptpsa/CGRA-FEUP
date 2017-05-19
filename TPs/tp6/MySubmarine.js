@@ -1,5 +1,9 @@
 var degToRad = Math.PI / 180.0;
 var radToDeg = 180.0 / Math.PI;
+var X = 0;
+var Y = 1;
+var Z = 2;
+
 /**
  * MySubmarine
  * @constructor
@@ -10,9 +14,9 @@ var radToDeg = 180.0 / Math.PI;
 	var d = new Date();
 	this.oldCurrTime = d.getTime();
 	
-	this.x = x || 0;
- 	this.y = y || 0;
- 	this.z = z || 0;
+	//Store the object's position 
+	this.pos = [];
+	this.pos.push (x||0, y||0, z||0)
 
 	this.rotationAngle = rotationAngle*degToRad || 0;
 	this.verticalAngle = verticalAngle*degToRad || 0;
@@ -247,7 +251,7 @@ MySubmarine.prototype.changeSpeed = function (speedDelta){
 };
 
 MySubmarine.prototype.translateToPos = function(){
-	this.scene.translate (this.x, this.y, this.z);
+	this.scene.translate (this.pos[X], this.pos[Y], this.pos[Z]);
 };
 
 MySubmarine.prototype.update = function(currTime){
@@ -266,9 +270,9 @@ MySubmarine.prototype.update = function(currTime){
 };
 
 MySubmarine.prototype.updatePos = function(deltaTime){
-	this.x += ((this.scene.speed/10)*Math.sin (this.rotationAngle))* (deltaTime/1000);
-	this.y += ((this.scene.speed/10)*Math.sin (-this.verticalAngle))* (deltaTime/1000); //-this.verticalAngle because we start it off as 0 and due to the way the trigonometic circle works we want (180-this.verticalAngle)
-	this.z += ((this.scene.speed/10)*Math.cos (this.rotationAngle))* (deltaTime/1000);
+	this.pos[X] += ((this.scene.speed/10)*Math.sin (this.rotationAngle))* (deltaTime/1000);
+	this.pos[Y] += ((this.scene.speed/10)*Math.sin (-this.verticalAngle))* (deltaTime/1000); //-this.verticalAngle because we start it off as 0 and due to the way the trigonometic circle works we want (180-this.verticalAngle)
+	this.pos[Z] += ((this.scene.speed/10)*Math.cos (this.rotationAngle))* (deltaTime/1000);
 };
 
 
@@ -364,7 +368,7 @@ MySubmarine.prototype.createTorpedo = function(){
 	//kinda like singleton
 	//if there isn't already a torpedo and there are targets
 	if ((this.torpedo === null) && (this.scene.targets[0] != null)){
-		this.torpedo = new MyTorpedo (this.scene, this.x, this.y-0.5-0.1, this.z-(4.08/2)+0.025, this.rotationAngle*radToDeg, this.verticalAngle*radToDeg);
+		this.torpedo = new MyTorpedo (this.scene, this.pos[X], this.pos[Y]-0.5-0.1, this.pos[Z]-(4.08/2)+0.025, this.rotationAngle*radToDeg, this.verticalAngle*radToDeg);
 		this.torpedo.getTarget ();
 	}
 };

@@ -16,6 +16,9 @@ var Z = 2;
 	//Store the object's position 
 	this.pos = [];
 	this.pos.push (x||0, y||0, z||0)
+	//Old position 
+	this.oldPos = [];
+	this.oldPos.push (0, 0, 0);
 
 	this.rotationAngle = rotationAngle*degToRad || 0;
 	this.verticalAngle = verticalAngle*degToRad || 0;
@@ -188,10 +191,10 @@ MyTorpedo.prototype.rotateTargetVer =  function(factor){
 
 MyTorpedo.prototype.getTarget = function(){
 	//if there are targets we should assign the first one to the torpedo
+
 	if (this.scene.targets[0] != null){
 		this.target = this.scene.targets[0];
-		//maybe remove the target from the array as well??
-		
+
 		this.p3.push (this.target.pos[X], this.target.pos[Y]+3, this.target.pos[Z]);
 		this.p4.push (this.target.pos[X], this.target.pos[Y], this.target.pos[Z]);
 
@@ -203,12 +206,30 @@ MyTorpedo.prototype.getTarget = function(){
 MyTorpedo.prototype.bezierCurve = function(deltaTime){
 	if ((this.t + (deltaTime/1000)/this.distance) <= 1){
 		this.t += (deltaTime/1000)/this.distance; //distance == time
-	}
 
-	for (var i=0; i<3; i++){
-		this.pos[i] = Math.pow(1-this.t,3)*this.p1[i]
-	+3*this.t*Math.pow(1-this.t,2)*this.p2[i]
-	+3*Math.pow(this.t,2)*(1-this.t)*this.p3[i]
-	+Math.pow(this.t,3)*this.p4[i];
+		for (var i=0; i<3; i++){
+			//store the old position
+			this.oldPos[i] = this.pos[i];
+
+			//calculate new position
+			this.pos[i] = Math.pow(1-this.t,3)*this.p1[i]
+		+3*this.t*Math.pow(1-this.t,2)*this.p2[i]
+		+3*Math.pow(this.t,2)*(1-this.t)*this.p3[i]
+		+Math.pow(this.t,3)*this.p4[i];
+
+			//update directionArray
+			this.directionArray[i] = this.pos[i]-this.oldPos[i];
+
+			var directionArrayMod = Math.sqrt(Math.pow(this.directionArray[X],2)+Math.pow(this.directionArray[Y],2)+Math.pow(this.directionArray[Z],2));
+			this.rotationAngle = Math.atan(this.directionArray[Y]/this.directionArray[X]);
+			this.verticalAngle = Math.acos(this.directionArray[Z]/directionArrayMod);
+		}
+
+	}
+	else{
+		//arrived at target
+		this.scene.targets.splice(0,1);
+		this.scene.submarine.torpedo = null; // the garbage collector will free the torpedo in the next pass
+		//even though we delete the only reference to (this) object it will not be destroyed until the current function is done executing
 	}
 };
