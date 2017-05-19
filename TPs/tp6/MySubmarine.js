@@ -76,6 +76,13 @@ var Z = 2;
 	this.bodyAppearance5.setShininess(10);
 	this.bodyAppearance5.loadTexture(this.scene.submarineAppearances[4][0]);
 
+	this.bodyAppearance6 = new CGFappearance(this.scene);
+	this.bodyAppearance6.setAmbient(0.33, 0.33, 0.33, 1);
+	this.bodyAppearance6.setSpecular(0.2,0.2,0.2,1);	
+	this.bodyAppearance6.setDiffuse(0.2,0.2,0.2,1);	
+	this.bodyAppearance6.setShininess(10);
+	this.bodyAppearance6.loadTexture(this.scene.submarineAppearances[5][0]);
+
 	this.towerAppearance1 = new CGFappearance(this.scene);
 	this.towerAppearance1.setAmbient(0.33, 0.33, 0.33, 1);
 	this.towerAppearance1.setSpecular(0.9,0.9,0.9,1);	
@@ -111,6 +118,13 @@ var Z = 2;
 	this.towerAppearance5.setShininess(30);
 	this.towerAppearance5.loadTexture(this.scene.submarineAppearances[4][1]);
 
+	this.towerAppearance6 = new CGFappearance(this.scene);
+	this.towerAppearance6.setAmbient(0.33, 0.33, 0.33, 1);
+	this.towerAppearance6.setSpecular(0.9,0.9,0.9,1);	
+	this.towerAppearance6.setDiffuse(0.3,0.3,0.3,1);	
+	this.towerAppearance6.setShininess(30);
+	this.towerAppearance6.loadTexture(this.scene.submarineAppearances[5][1]);
+
 	this.periscopeAppearance1 = new CGFappearance(this.scene);
 	this.periscopeAppearance1.setAmbient(0.33, 0.33, 0.33, 1);
 	this.periscopeAppearance1.setSpecular(0.9,0.9,0.9,1);	
@@ -145,6 +159,13 @@ var Z = 2;
 	this.periscopeAppearance5.setDiffuse(0.3,0.3,0.3,1);	
 	this.periscopeAppearance5.setShininess(30);
 	this.periscopeAppearance5.loadTexture(this.scene.submarineAppearances[4][2]);
+
+	this.periscopeAppearance6 = new CGFappearance(this.scene);
+	this.periscopeAppearance6.setAmbient(0.33, 0.33, 0.33, 1);
+	this.periscopeAppearance6.setSpecular(0.9,0.9,0.9,1);	
+	this.periscopeAppearance6.setDiffuse(0.3,0.3,0.3,1);	
+	this.periscopeAppearance6.setShininess(30);
+	this.periscopeAppearance6.loadTexture(this.scene.submarineAppearances[5][2]);
  };
 
  MySubmarine.prototype = Object.create(CGFobject.prototype);
@@ -167,6 +188,9 @@ var Z = 2;
 	  	break;
 	  case 4:
 	  	this.bodyAppearance5.apply();
+	  	break;
+	  case 5:
+	  	this.bodyAppearance6.apply();
 	  	break;
 	  default:
 		this.bodyAppearance1.apply();
@@ -244,6 +268,9 @@ var Z = 2;
 	  case 4:
 		this.towerAppearance5.apply();
 		break;
+	  case 5:
+		this.towerAppearance6.apply();
+		break;
 	  default:
 		this.towerAppearance1.apply();
 		break;
@@ -288,6 +315,9 @@ var Z = 2;
 		break;
 	  case 4:
 		this.periscopeAppearance5.apply();
+		break;
+	  case 5:
+		this.periscopeAppearance6.apply();
 		break;
 	  default:
 		this.periscopeAppearance1.apply();

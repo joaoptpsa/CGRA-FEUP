@@ -32,6 +32,8 @@ LightingScene.prototype.init = function(application) {
 	this.submarineAppearances[3].push ("resources/images/yellow.jpg", "resources/images/yellow.jpg", "resources/images/yellow.jpg"); 
 	this.submarineAppearances[4] = [];
 	this.submarineAppearances[4].push ("resources/images/red-bull.jpg", "resources/images/red-bull.jpg", "resources/images/red-bull.jpg");
+	this.submarineAppearances[5] = [];
+	this.submarineAppearances[5].push ("resources/images/windows.jpg", "resources/images/windows.jpg", "resources/images/windows.jpg");
 
 	this.currSubmarineAppearance = 0;
 
@@ -40,7 +42,8 @@ LightingScene.prototype.init = function(application) {
 		'BlueCammo' : 1,
 		'HidingPlainSite' : 2,
 		'Yellow' : 3,
-		'Red Bull' : 4
+		'Red Bull' : 4,
+		'Windows' : 5
 	};
 
 	this.initCameras();
