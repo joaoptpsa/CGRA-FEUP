@@ -16,14 +16,14 @@ function MyFish(scene) {
 	this.materialBody.setSpecular(0.1,0.1,0.1,1);
 	this.materialBody.setDiffuse(0.8,0.8,0.8,1);
 	this.materialBody.setShininess(10);
-	//this.materialBody.loadTexture("resources/images/fish_body.jpg");
+	this.materialBody.loadTexture("resources/images/fish_body.png");
 
 	this.materialTail = new CGFappearance(this.scene);
 	this.materialTail.setAmbient(0.6, 0.32, 0.004,1);
 	this.materialTail.setSpecular(0.1,0.1,0.1,1);
 	this.materialTail.setDiffuse(0.8,0.8,0.8,1);
 	this.materialTail.setShininess(10);
-	//this.materialTail.loadTexture("resources/images/fish_tail.png");
+	this.materialTail.loadTexture("resources/images/fish_tail.png");
 	
 };
 
