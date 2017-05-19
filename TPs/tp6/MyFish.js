@@ -35,6 +35,7 @@ MyFish.prototype.display = function () {
 	this.scene.pushMatrix();
 		this.scene.rotate (90*degToRad, 0, 0, 1); //so it stands horizontal
 		this.scene.scale(0.4,1,1);
+		this.scene.rotate (180*degToRad, 0, 0, 1);
 		this.materialBody.apply();
 		this.circle.display();
 	this.scene.popMatrix();
