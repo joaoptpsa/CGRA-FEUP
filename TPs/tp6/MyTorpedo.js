@@ -37,15 +37,6 @@ var Z = 2;
 	
 	//P2 is the point 6 units ahead from the starting position for the torpedo
 	this.directionArray = [];
-	if ((this.rotationAngle/(2*Math.PI))>=0){
-		if (this.rotationAngle>0){
-			
-		}
-	}
-	else {
-		//<0
-	}
-
 	this.directionArray.push (Math.cos(rotationAngle)*Math.cos(verticalAngle), Math.sin(rotationAngle)*Math.cos(verticalAngle), Math.sin(verticalAngle)); 
 	
 	this.p2 = [];
@@ -218,13 +209,11 @@ MyTorpedo.prototype.bezierCurve = function(deltaTime){
 			
 			//update directionArray
 			this.directionArray[i] = this.pos[i]-this.oldPos[i];
-
-			var directionArrayMod = Math.sqrt(Math.pow(this.directionArray[X],2)+Math.pow(this.directionArray[Y],2)+Math.pow(this.directionArray[Z],2));
-			this.rotationAngle = Math.atan(this.directionArray[Y]/this.directionArray[X]);
-			this.verticalAngle = Math.acos(this.directionArray[Z]/directionArrayMod);
-			//Math.PI- because this type of conversion gives us the angle starting from the y axis to the x axis
-			
 		}
+		
+		var directionArrayMod = Math.sqrt(Math.pow(this.directionArray[X],2)+Math.pow(this.directionArray[Y],2)+Math.pow(this.directionArray[Z],2));
+		this.rotationAngle = Math.atan(this.directionArray[Y]/this.directionArray[X]);
+		this.verticalAngle = Math.asin(this.directionArray[Z]/directionArrayMod);
 
 	}
 	else{

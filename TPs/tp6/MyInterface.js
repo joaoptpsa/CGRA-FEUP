@@ -54,6 +54,8 @@ MyInterface.prototype.init = function(application) {
 
 	this.gui.add(this.scene, 'currSubmarineAppearance', this.scene.submarineAppearanceList);
 
+	this.gui.add(this.scene, 'currentFPS', this.scene.fpsList);
+
 	return true;
 };
 

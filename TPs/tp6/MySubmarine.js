@@ -432,7 +432,7 @@ MySubmarine.prototype.updateHorizontalRudderAngle = function(maxAngle, rudderRot
 				this.horizontalRudderAngle -= Math.abs(rudderRotation);
 			}
 			else{
-				this.horizontalRudderAngle =0;
+				this.horizontalRudderAngle=0;
 			}
 		}
 		else if (this.horizontalRudderAngle<0){
@@ -440,7 +440,7 @@ MySubmarine.prototype.updateHorizontalRudderAngle = function(maxAngle, rudderRot
 				this.horizontalRudderAngle += Math.abs(rudderRotation);
 			}
 			else{
-				this.horizontalRudderAngle =0;
+				this.horizontalRudderAngle=0;
 			}
 		}
 	}
@@ -457,7 +457,7 @@ MySubmarine.prototype.createTorpedo = function(){
 	//kinda like singleton
 	//if there isn't already a torpedo and there are targets
 	if ((this.torpedo === null) && (this.scene.targets[0] != null)){
-		this.torpedo = new MyTorpedo (this.scene, this.pos[X], this.pos[Y]-0.5-0.1, this.pos[Z]-(4.08/2)+0.025, this.rotationAngle*radToDeg, this.verticalAngle*radToDeg);
+		this.torpedo = new MyTorpedo (this.scene, this.pos[X], this.pos[Y]-0.5-0.1, this.pos[Z], this.rotationAngle*radToDeg, this.verticalAngle*radToDeg);
 		this.torpedo.getTarget ();
 	}
 };

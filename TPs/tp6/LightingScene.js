@@ -49,6 +49,15 @@ LightingScene.prototype.init = function(application) {
 		'Windows' : 5
 	};
 
+	this.currentFPS = 144;
+
+	this.fpsList = {
+		'30' : 30,
+		'60' : 60,
+		'120' : 120,
+		'144' : 144
+	}
+
 	this.initCameras();
 
 	this.initLights();
