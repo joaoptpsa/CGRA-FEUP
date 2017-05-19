@@ -37,8 +37,17 @@ var Z = 2;
 	
 	//P2 is the point 6 units ahead from the starting position for the torpedo
 	this.directionArray = [];
-	this.directionArray.push (Math.sin(Math.PI-verticalAngle)*Math.cos(rotationAngle), Math.sin(Math.PI-verticalAngle)*Math.sin(rotationAngle), Math.cos(Math.PI-verticalAngle)); 
-	//Math.PI-verticalAngle everytime we use the verticalAngle because this type of conversion needs the angle starting from the y axis to the x axis
+	if ((this.rotationAngle/(2*Math.PI))>=0){
+		if (this.rotationAngle>0){
+			
+		}
+	}
+	else {
+		//<0
+	}
+
+	this.directionArray.push (Math.cos(rotationAngle)*Math.cos(verticalAngle), Math.sin(rotationAngle)*Math.cos(verticalAngle), Math.sin(verticalAngle)); 
+	
 	this.p2 = [];
 	this.p2.push (this.pos[X]+6*this.directionArray[X], this.pos[Y]+6*this.directionArray[Y], this.pos[Z]+6*this.directionArray[Z]);
 

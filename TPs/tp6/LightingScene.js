@@ -1,4 +1,7 @@
 var degToRad = Math.PI / 180.0;
+var FPSToUpdate = 1/1000;
+
+var FPS = 120;
 
 var OCEAN_DIVISIONS = 150;
 
@@ -264,7 +267,7 @@ LightingScene.prototype.display = function() {
 		this.popMatrix();
 	};
 
-	this.setUpdatePeriod (100);
+	this.setUpdatePeriod (FPS*FPSToUpdate);
 };
 
 
