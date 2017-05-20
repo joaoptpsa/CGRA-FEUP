@@ -76,6 +76,7 @@ LightingScene.prototype.init = function(application) {
 	this.cylinder = new MyCylinder (this, 20, 1);
 	this.clock = new MyClock (this);
 	this.submarine = new MySubmarine (this, 8, 5, 8, 180, 0);
+	this.explosion = new MyExplosion (this);
 	
 	this.targets = [];
 	this.generateTargets();
@@ -263,6 +264,13 @@ LightingScene.prototype.display = function() {
 			this.targets[i].display();
 		this.popMatrix();
 	};
+
+	//Explosion
+	this.pushMatrix();
+		//this.submarine.translateToPos();
+		//this.submarine.updateRotation ();
+		this.explosion.display ();
+	this.popMatrix();
 
 	this.setUpdatePeriod (FPS*FPSToUpdate);
 };

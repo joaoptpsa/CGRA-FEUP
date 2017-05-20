@@ -6,7 +6,7 @@ var degToRad = Math.PI / 180.0;
  function MyCircleTarget(scene) {
 	CGFobject.call(this,scene);
 
-	this.circle = new MyCircle (this.scene, 20, 1);
+	this.circle = new MyCircle (this.scene, 20, 0.5);
 
 	this.materialCircle = new CGFappearance(this.scene);
 	this.materialCircle.setAmbient(0.6, 0.32, 0.004,1);
