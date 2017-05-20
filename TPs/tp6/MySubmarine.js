@@ -461,3 +461,9 @@ MySubmarine.prototype.createTorpedo = function(){
 		this.torpedo.getTarget ();
 	}
 };
+
+
+MySubmarine.prototype.destroyTorpedo = function(){
+	this.torpedo = null; // the garbage collector will free the torpedo in the next pass
+	//even though we delete the only reference to (this) object it will not be destroyed until the current function is done executing
+};

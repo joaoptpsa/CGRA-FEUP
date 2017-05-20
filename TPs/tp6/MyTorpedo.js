@@ -218,8 +218,8 @@ MyTorpedo.prototype.bezierCurve = function(deltaTime){
 	}
 	else{
 		//arrived at target
-		this.scene.targets.splice(0,1);
-		this.scene.submarine.torpedo = null; // the garbage collector will free the torpedo in the next pass
-		//even though we delete the only reference to (this) object it will not be destroyed until the current function is done executing
+		this.scene.destroyTarget(0);
+		this.scene.submarine.destroyTorpedo();
+		this.scene.generateTargets();
 	}
 };

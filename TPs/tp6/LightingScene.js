@@ -77,20 +77,8 @@ LightingScene.prototype.init = function(application) {
 	this.clock = new MyClock (this);
 	this.submarine = new MySubmarine (this, 8, 5, 8, 180, 0);
 	
-	this.targetsPos = [[]];
-	for (var i=0; i<NUM_TARGETS; i++){
-		this.targetsPos[i] = [];
-		//Generate random positions on the bottom of the ocean
-		var x = Math.floor(Math.random()*16)+1;
-		var y = 0.05; //so it stays abit above the ocean floor
-		var z = Math.floor(Math.random()*16)+1;
-		this.targetsPos[i].push (x, y , z);
-	}
-
 	this.targets = [];
-	for (var i=0; i<NUM_TARGETS; i++){
-		this.targets.push (new MyTarget (this, this.targetsPos[i][0], this.targetsPos[i][1], this.targetsPos[i][2]));
-	}
+	this.generateTargets();
 
 	// Materials
 	this.materialDefault = new CGFappearance(this);
@@ -293,3 +281,17 @@ LightingScene.prototype.update = function (currTime){
 LightingScene.prototype.toggleClock = function (){
 	this.clock.running = !this.clock.running;
 };
+
+LightingScene.prototype.generateTargets = function() {
+	for (var i=this.targets.length; i<NUM_TARGETS; i++){
+		//Generate random positions on the bottom of the ocean
+		var x = Math.floor(Math.random()*16)+1;
+		var y = 0.05; //so it stays abit above the ocean floor
+		var z = Math.floor(Math.random()*16)+1;
+		this.targets.push (new MyTarget (this, x, y, z));
+	}
+}
+
+LightingScene.prototype.destroyTarget = function(index) {
+	this.targets.splice(index,1);
+}
