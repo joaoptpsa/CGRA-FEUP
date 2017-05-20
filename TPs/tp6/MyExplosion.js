@@ -62,8 +62,12 @@ MyExplosion.prototype.update = function(currTime){
 	this.oldCurrTime = currTime;
 	
 	// deltaTime / 1000 == change in seconds
+	var increase;
 
 	for (var i=0; i<3; i++){
-		this.scaleCurrent[i]+=((deltaTime/1000)/this.duration)*scaleDiff[i];	
+		increase = ((deltaTime/1000)/this.duration)*this.scaleDiff[i];
+		if (this.scaleCurrent[i]+increase<=this.scaleEnd[i]){
+			this.scaleCurrent[i]+=((deltaTime/1000)/this.duration)*this.scaleDiff[i];
+		}
 	}
 };

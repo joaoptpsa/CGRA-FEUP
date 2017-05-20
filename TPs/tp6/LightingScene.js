@@ -76,10 +76,11 @@ LightingScene.prototype.init = function(application) {
 	this.cylinder = new MyCylinder (this, 20, 1);
 	this.clock = new MyClock (this);
 	this.submarine = new MySubmarine (this, 8, 5, 8, 180, 0);
-	this.explosion = new MyExplosion (this);
-	
+
 	this.targets = [];
 	this.generateTargets();
+
+	this.explosions = [];
 
 	// Materials
 	this.materialDefault = new CGFappearance(this);
@@ -265,12 +266,12 @@ LightingScene.prototype.display = function() {
 		this.popMatrix();
 	};
 
-	//Explosion
-	this.pushMatrix();
-		//this.submarine.translateToPos();
-		//this.submarine.updateRotation ();
-		this.explosion.display ();
-	this.popMatrix();
+	//Explosions
+	for (var i=0; i<this.explosions.length; i++){
+		this.pushMatrix();
+			this.explosions[i].display();
+		this.popMatrix();
+	};
 
 	this.setUpdatePeriod (FPS*FPSToUpdate);
 };
@@ -282,6 +283,10 @@ LightingScene.prototype.update = function (currTime){
 	}
 	
 	this.submarine.update(currTime);
+
+	for (var i=0; i<this.explosions.length; i++){
+		this.explosions[i].update(currTime);
+	};
 
 };
 
@@ -301,5 +306,6 @@ LightingScene.prototype.generateTargets = function() {
 }
 
 LightingScene.prototype.destroyTarget = function(index) {
+	this.explosions.push(this.targets[index].getExplosion());
 	this.targets.splice(index,1);
 }

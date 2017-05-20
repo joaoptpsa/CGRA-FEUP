@@ -43,3 +43,7 @@ var Z = 2;
  MyTarget.prototype.translateToPos = function (){
  	this.scene.translate (this.pos[X], this.pos[Y], this.pos[Z]);
  };
+
+MyTarget.prototype.getExplosion = function (){
+ 	return new MyExplosion (this.scene, this.pos[X], this.pos[Y], this.pos[Z]);
+};
