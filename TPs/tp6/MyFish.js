@@ -11,12 +11,19 @@ function MyFish(scene) {
 	this.circle = new MyCircle (this.scene, 20, 0.5); //radius = 0.5 ; diameter = 1
 	this.triangle = new MyTriangle (this.scene, 0.5, 0.2); //base = 0.5 ; height = 0.2
 	
-	this.materialBody = new CGFappearance(this.scene);
-	this.materialBody.setAmbient(0.6, 0.32, 0.004,1);
-	this.materialBody.setSpecular(0.1,0.1,0.1,1);
-	this.materialBody.setDiffuse(0.8,0.8,0.8,1);
-	this.materialBody.setShininess(10);
-	this.materialBody.loadTexture("resources/images/fish_body.png");
+	this.materialBodyUp = new CGFappearance(this.scene);
+	this.materialBodyUp.setAmbient(0.6, 0.32, 0.004,1);
+	this.materialBodyUp.setSpecular(0.1,0.1,0.1,1);
+	this.materialBodyUp.setDiffuse(0.8,0.8,0.8,1);
+	this.materialBodyUp.setShininess(10);
+	this.materialBodyUp.loadTexture("resources/images/fish_body_1.png");
+
+	this.materialBodyDown = new CGFappearance(this.scene);
+	this.materialBodyDown.setAmbient(0.6, 0.32, 0.004,1);
+	this.materialBodyDown.setSpecular(0.1,0.1,0.1,1);
+	this.materialBodyDown.setDiffuse(0.8,0.8,0.8,1);
+	this.materialBodyDown.setShininess(10);
+	this.materialBodyDown.loadTexture("resources/images/fish_body_2.png");
 
 	this.materialTail = new CGFappearance(this.scene);
 	this.materialTail.setAmbient(0.6, 0.32, 0.004,1);
@@ -36,7 +43,7 @@ MyFish.prototype.display = function () {
 		this.scene.rotate (90*degToRad, 0, 0, 1); //so it stands horizontal
 		this.scene.scale(0.4,1,1);
 		this.scene.rotate (180*degToRad, 0, 0, 1);
-		this.materialBody.apply();
+		this.materialBodyDown.apply();
 		this.circle.display();
 	this.scene.popMatrix();
 
@@ -44,7 +51,7 @@ MyFish.prototype.display = function () {
 		this.scene.rotate (90*degToRad, 0, 0, 1); //so it stands horizontal
 		this.scene.scale(0.4,1,1);
 		this.scene.rotate (180*degToRad, 1, 0, 0);
-		this.materialBody.apply();
+		this.materialBodyUp.apply();
 		this.circle.display();
 	this.scene.popMatrix();
 	
