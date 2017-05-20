@@ -286,6 +286,9 @@ LightingScene.prototype.update = function (currTime){
 
 	for (var i=0; i<this.explosions.length; i++){
 		this.explosions[i].update(currTime);
+		if(this.explosions[i].getStatus()){
+			this.explosions.splice(i,1);
+		}
 	};
 
 };
@@ -306,6 +309,6 @@ LightingScene.prototype.generateTargets = function() {
 }
 
 LightingScene.prototype.destroyTarget = function(index) {
-	this.explosions.push(this.targets[index].getExplosion());
+	this.explosions.push(this.targets[index].createExplosion());
 	this.targets.splice(index,1);
 }

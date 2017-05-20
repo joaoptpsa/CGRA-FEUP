@@ -30,6 +30,7 @@ var Z = 2;
 	this.scaleDiff.push (this.scaleEnd[X]-this.scaleStart[X], this.scaleEnd[Y]-this.scaleStart[Y], this.scaleEnd[Z]-this.scaleStart[Z]);
 
 	this.duration = 1; //how long does the explosion take?
+	this.finished = false;
 
 	this.explosion = new MyHalfSphere (this.scene, 20, 10);
 
@@ -69,5 +70,12 @@ MyExplosion.prototype.update = function(currTime){
 		if (this.scaleCurrent[i]+increase<=this.scaleEnd[i]){
 			this.scaleCurrent[i]+=((deltaTime/1000)/this.duration)*this.scaleDiff[i];
 		}
+		else{
+			this.finished = true;
+		}
 	}
+};
+
+MyExplosion.prototype.getStatus = function(){
+	return this.finished;
 };

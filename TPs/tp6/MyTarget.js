@@ -44,6 +44,6 @@ var Z = 2;
  	this.scene.translate (this.pos[X], this.pos[Y], this.pos[Z]);
  };
 
-MyTarget.prototype.getExplosion = function (){
+MyTarget.prototype.createExplosion = function (){
  	return new MyExplosion (this.scene, this.pos[X], this.pos[Y], this.pos[Z]);
 };
