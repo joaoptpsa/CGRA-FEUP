@@ -114,3 +114,7 @@ MyClock.prototype.update = function (currTime){ //CurrTime = Current time in ms
 	this.minutePointer.setAngle (this.minutePointer.angle + (minutesInc * (deltaTime / 1000)));
 	this.hourPointer.setAngle (this.hourPointer.angle + (hoursInc * (deltaTime / 1000)));
 };
+
+MyClock.prototype.toggleClock = function (){
+	this.running = !this.running;
+};

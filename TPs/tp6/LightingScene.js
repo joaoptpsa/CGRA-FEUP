@@ -295,7 +295,7 @@ LightingScene.prototype.update = function (currTime){
 
 
 LightingScene.prototype.toggleClock = function (){
-	this.clock.running = !this.clock.running;
+	this.clock.toggleClock();
 };
 
 LightingScene.prototype.generateTargets = function() {
