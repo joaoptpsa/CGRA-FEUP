@@ -147,7 +147,6 @@ MyTorpedo.prototype.update = function(currTime){
 	// deltaTime / 1000 == change in seconds 
 
 	this.updatePos(deltaTime);
-	this.helix.updateHelixAngle(deltaTime); //in practice our "helixes" are just one
 	this.updateVerticalRudderAngle (this.rudderMaxAngle, (this.rudderMaxAngle*0.5)*(deltaTime/1000), 1); //Takes two seconds to reset
 	this.updateHorizontalRudderAngle (this.rudderMaxAngle, (this.rudderMaxAngle*0.5)*(deltaTime/1000), 1); //Takes two seconds to reset
 };
@@ -161,7 +160,7 @@ MyTorpedo.prototype.updatePos = function(deltaTime){
 
 MyTorpedo.prototype.updateRotation = function(){
 	//this.scene.rotate (this.rotationAngle, 0, Math.cos(this.verticalAngle), -Math.sin(this.verticalAngle)); //Uncomment to make the submarine rotate on its "butt" axis
-	this.scene.rotate (this.rotationAngle, 0, 1, 0); //Uncomment to make the submarine rotate always in the y axis
+	this.scene.rotate (this.rotationAngle, 0, 1, 0); //Uncomment to make the TORPEDO rotate always in the y axis
 	this.scene.rotate (this.verticalAngle, 1, 0, 0);
 	
 };

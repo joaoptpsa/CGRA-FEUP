@@ -1,5 +1,5 @@
 var degToRad = Math.PI / 180.0;
-var FPSToUpdate = 1/1000;
+var FPSToUpdate = 1000;
 
 var FPS = 120;
 
@@ -21,8 +21,8 @@ LightingScene.prototype.init = function(application) {
 	this.luz2=true;
 	this.luz3=true;
 	this.luz4=true;
-	//this.speed=3;
-	this.speed=0;
+	this.speed=3;
+	//this.speed=0;
 	
 	this.submarineAppearances = [[]];
 	this.submarineAppearances[0] = [];
@@ -273,7 +273,7 @@ LightingScene.prototype.display = function() {
 		this.popMatrix();
 	};
 
-	this.setUpdatePeriod (FPS*FPSToUpdate);
+	this.setUpdatePeriod (FPSToUpdate/this.currentFPS);
 };
 
 
